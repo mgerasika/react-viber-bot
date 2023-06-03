@@ -28,7 +28,7 @@ export const renderToStringAsync = async (request: IViberRequest): Promise<IRend
         if (renderCount > 10) {
             throw 'Too many rerenders';
         }
-        console.log('req ', contextValue.promises.length);
+        console.log('promises count ', contextValue.promises.length);
     } while (contextValue.promises.length > 0);
 
     const text = html2text(html);

@@ -13,7 +13,8 @@ const EApis = {
 const ENV = {
 	VIBER_WEB_HOOK: process.env.VIBER_WEB_HOOK,
 	PROXY_WEB_HOOK: process.env.PROXY_WEB_HOOK,
-	VIBER_PROXY_TOKEN: process.env.VIBER_PROXY_TOKEN,
+	VIBER_PROXY_TOKEN_1: process.env.VIBER_PROXY_TOKEN_1,
+	VIBER_PROXY_TOKEN_2: process.env.VIBER_PROXY_TOKEN_2,
 };
 const app = express();
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -120,7 +121,7 @@ module.exports = app;
 function getAxiosConfig() {
 	return {
 		headers: {
-			"X-Viber-Auth-Token": ENV.VIBER_PROXY_TOKEN,
+			"X-Viber-Auth-Token": ENV.VIBER_PROXY_TOKEN_2,
 		},
 	};
 }

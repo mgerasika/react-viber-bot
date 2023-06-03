@@ -1,4 +1,3 @@
-import { ENV } from '@src/constants/env.constant';
 import { VIBER_LINKS } from '@src/constants/viber-links.constant';
 import { IPageDto } from '@src/dto/page.dto';
 import { EViberMessageType } from '@src/enums/viber-message-type.enum';

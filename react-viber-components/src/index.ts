@@ -33,11 +33,6 @@ app.use(express.json());
 app.use(express.urlencoded());
 // app.use(express.multipart());
 
-app.get("/web_hook", async (req, res) => {
-	console.log('request get: hello world')
-  res.status(200).send("hello world");
-});
-
 app.post("/web_hook", async (request, response) => {
 	try {
 		const requestBody = request.body;
@@ -87,10 +82,10 @@ app.post("/web_hook", async (request, response) => {
 		}
 		console.log('webhook_response = ', resObj);
 		if (resObj && resObj.message) {
-			response.status(200).send(JSON.stringify(resObj));
+			return response.status(200).send(JSON.stringify(resObj));
 		}
 		else {
-			response.status(200).send();
+			return response.status(200).send();
 		}
 	} catch (err) {
 		console.log('error', err);
@@ -99,7 +94,7 @@ app.post("/web_hook", async (request, response) => {
 });
 
 const PORT = process.env.PORT || 3009;
-console.log(app.get("env"));
+console.log('env', app.get("env"));
 
 const httpServer = http.createServer(app);
 

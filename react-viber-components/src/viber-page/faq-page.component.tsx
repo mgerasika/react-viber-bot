@@ -1,4 +1,3 @@
-import { ENV } from '@src/constants/env.constant';
 import { IFaqDto } from '@src/dto/faq.dto';
 import { EViberMessageType } from '@src/enums/viber-message-type.enum';
 

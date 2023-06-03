@@ -165,7 +165,7 @@ export const PersonalPage = ({
           },
           {}
         );
-        console.log(groups);
+        console.log('groups',groups);
 
         // https://developers.viber.com/docs/tools/text-formatting/
         Object.keys(groups).forEach((key) => {

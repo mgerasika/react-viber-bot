@@ -10,6 +10,7 @@ export const ViberKeyboard = ({ children }: IProps): JSX.Element => {
             json={{
                 Type: 'keyboard',
                 DefaultHeight: false,
+				
             }}
         >
             {children ? <>,"Buttons":[{children}]</> : null}
