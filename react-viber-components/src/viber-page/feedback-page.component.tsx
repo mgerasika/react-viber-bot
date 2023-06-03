@@ -6,7 +6,7 @@ import { IApiResult } from '@src/interfaces/api-result.interface';
 import { IViberRequest } from '@src/interfaces/viber-request.interface';
 import { IViberSender } from '@src/interfaces/viber-sender.interface';
 import { getViberBigText } from '@src/viber-components/get-viber-big-text';
-import { useServerPromise } from '@src/viber-components/use-server-promise.hook';
+import { useServerQuery } from '@src/viber-components/use-server-query.hook';
 import { ViberButton } from '@src/viber-components/viber-button.component';
 import { ViberKeyboard } from '@src/viber-components/viber-keyboard.component';
 import { ViberMessage } from '@src/viber-components/viber-message.component';
@@ -17,16 +17,15 @@ interface IProps {
 }
 
 export const FeedbackPage = ({ request: { body } }: IProps): JSX.Element => {
-    const [pages] = useServerPromise<IApiResult<IPageDto[]>>(undefined, 'pages', () => Promise.resolve({}),);
+    const [pages] = useServerQuery<IApiResult<IPageDto[]>>( 'pages', () => Promise.resolve({}),);
 
     const page = pages?.data?.find((page) => page.type === 'feedback');
     return (
         <ViberMessage
-            type={EViberMessageType.text}
             sender={body?.sender as IViberSender}
             keyboard={
                 <ViberKeyboard>
-                    <ViberButton Columns={6} Rows={1} Text="На головну" arg={{ link: VIBER_LINKS.index }} />
+                    <ViberButton Columns={6} Rows={1} Text="На головну" onClick={{ link: VIBER_LINKS.index }} />
                 </ViberKeyboard>
             }
             text={

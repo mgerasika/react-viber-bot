@@ -6,7 +6,7 @@ import { IViberRequest } from '@src/interfaces/viber-request.interface';
 import { IViberSender } from '@src/interfaces/viber-sender.interface';
 import { calcPaging } from '@src/utils/calc-paging.util';
 import { Paging } from '@src/viber-components/paging.component';
-import { useServerPromise } from '@src/viber-components/use-server-promise.hook';
+import { useServerQuery } from '@src/viber-components/use-server-query.hook';
 import { ViberCard } from '@src/viber-components/viber-card.component';
 import { ViberKeyboard } from '@src/viber-components/viber-keyboard.component';
 import { ViberMessage } from '@src/viber-components/viber-message.component';
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 export const FaqPage = ({ request: { actionArg, body } }: IProps): JSX.Element => {
-    const [faqs] = useServerPromise<IApiResult<IFaqDto[]>>(undefined, 'faq',() => Promise.resolve({}),);
+    const [faqs] = useServerQuery<IApiResult<IFaqDto[]>>( 'faq',() => Promise.resolve({}),);
 
     const link = actionArg?.link;
     const currentPage = actionArg.actionArgument || 0;
@@ -29,7 +29,6 @@ export const FaqPage = ({ request: { actionArg, body } }: IProps): JSX.Element =
 
     return (
         <ViberMessage
-            type={EViberMessageType.rich_media}
             sender={body?.sender as IViberSender}
             keyboard={
                 <ViberKeyboard>

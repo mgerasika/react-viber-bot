@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react';
 import { Json } from './json.component';
 
 interface IProps {
-    children?: ReactNode | ReactNode[];
+    buttons?:  ReactNode[] | ReactNode;
 }
-export const ViberKeyboard = ({ children }: IProps): JSX.Element => {
+export const ViberKeyboard = ({ buttons }: IProps): JSX.Element => {
     return (
         <Json
             json={{
@@ -13,7 +13,7 @@ export const ViberKeyboard = ({ children }: IProps): JSX.Element => {
 				
             }}
         >
-            {children ? <>,"Buttons":[{children}]</> : null}
+			{buttons ? <>,"Buttons":[{buttons}]</> : null}
         </Json>
     );
 };

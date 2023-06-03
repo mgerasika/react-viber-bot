@@ -9,7 +9,7 @@ import { IViberSender } from "@src/interfaces/viber-sender.interface";
 import { ViberServerContext } from "../shared/viber-server.context";
 import { getViberActionId } from "@src/utils/get-viber-action-id.util";
 import { StringBuilder } from "@src/utils/string-builder.util";
-import { useServerPromise } from "@src/viber-components/use-server-promise.hook";
+import { useServerQuery } from "@src/viber-components/use-server-query.hook";
 import { ViberButton } from "@src/viber-components/viber-button.component";
 import { ViberKeyboard } from "@src/viber-components/viber-keyboard.component";
 import { ViberMessage } from "@src/viber-components/viber-message.component";
@@ -38,9 +38,9 @@ export const PersonalPage = ({
     newPhoneNumber = body?.message.contact?.phone_number;
   }
 
-  const [currentSubscription] = useServerPromise<
+  const [currentSubscription] = useServerQuery<
     IApiResult<IViberSubscriberDto | undefined> | undefined
-  >(undefined, "currentViberSubscription", () =>
+  >( "currentViberSubscription", () =>
    Promise.resolve({})
   );
 
@@ -49,8 +49,7 @@ export const PersonalPage = ({
     !currentSubscription?.data?.phone_number &&
     actionArg.actionName === EIndexAction.sharePhone
   ) {
-    useServerPromise<IApiResult<IViberSubscriberDto>>(
-      undefined,
+    useServerQuery<IApiResult<IViberSubscriberDto>>(
       "updateSubscription",
 		() => {
 			return Promise.resolve({});
@@ -71,8 +70,7 @@ export const PersonalPage = ({
     actionArg.actionName === EPersonalPageActions.confirmUpdatePersonalNumber &&
     Number(body?.message.text).toString() !== "NaN"
   ) {
-    useServerPromise<IApiResult<IViberSubscriberDto>>(
-      undefined,
+    useServerQuery<IApiResult<IViberSubscriberDto>>(
       "updateSubscription",
 		() => {
 		return Promise.resolve({});
@@ -118,7 +116,7 @@ export const PersonalPage = ({
               Columns={6}
               Rows={1}
               Text="Назад"
-              arg={{ link: VIBER_LINKS.personal }}
+              onClick={{ link: VIBER_LINKS.personal }}
             />
           </ViberKeyboard>
         }
@@ -142,9 +140,9 @@ export const PersonalPage = ({
   }
 
   if (currentSubscription?.data?.personal_number) {
-    const [personalInfo] = useServerPromise<
+    const [personalInfo] = useServerQuery<
       IApiResult<IGTableValueDto[] | undefined> | undefined
-    >(undefined, "personalInfoValues", () =>
+    >( "personalInfoValues", () =>
     //   apiHooks.gtable.useGetGTableValuesByPersonalNumberAsync({
     //     personal_number: currentSubscription?.data?.personal_number || "",
     //   })
@@ -229,7 +227,7 @@ export const PersonalPage = ({
                 ? "Змінити особовий рахунок"
                 : "Добавити особовий рахунок"
             }
-            arg={{
+            onClick={{
               link,
               actionName: EPersonalPageActions.updatePersonalNumber,
             }}
@@ -239,7 +237,7 @@ export const PersonalPage = ({
             Columns={3}
             Rows={1}
             Text="На головну"
-            arg={{ link: VIBER_LINKS.index }}
+            onClick={{ link: VIBER_LINKS.index }}
           />
         </ViberKeyboard>
       }

@@ -2,9 +2,10 @@ import React, { ReactNode } from 'react';
 
 interface IProps {
     isArray: boolean;
-    children: ReactNode;
+	children: ReactNode;
+	addComa?: boolean;
 }
-export const JsonRoot = ({ isArray, children }: IProps): JSX.Element => {
+export const JsonRoot = ({ addComa, isArray, children }: IProps): JSX.Element => {
     return isArray ? (
         <>
             {'['}
@@ -15,7 +16,8 @@ export const JsonRoot = ({ isArray, children }: IProps): JSX.Element => {
         <>
             {'{'}
             {children}
-            {'}'}
+				{'}'}
+				{addComa && ','}
         </>
     );
 };

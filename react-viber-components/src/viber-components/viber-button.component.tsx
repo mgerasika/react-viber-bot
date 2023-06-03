@@ -5,7 +5,7 @@ import React from 'react';
 import { Json } from './json.component';
 
 interface IProps {
-    arg:
+    onClick:
         | (Omit<IViberActionArg, 'link'> & {
               link: ILinkItem;
           })
@@ -16,19 +16,20 @@ interface IProps {
     ActionType?: 'reply' | 'share-phone' | 'location-picker' | 'open-url' | 'none' | 'payment';
     Rows: number;
 }
-export const ViberButton = ({ arg, Columns, Rows, Text, ActionType = 'reply' }: IProps): JSX.Element => {
+export const ViberButton = ({ onClick, Columns, Rows, Text, ActionType = 'reply' }: IProps): JSX.Element => {
     return (
-        <Json
+		<Json
+			addComa
             json={{
                 Columns,
                 Rows,
                 Text,
                 ActionType,
-                ActionBody: arg
+                ActionBody: onClick
                     ? getViberActionId({
-                          link: arg?.link,
-                          actionName: arg.actionName,
-                          actionArgument: arg.actionArgument,
+                          link: onClick?.link,
+                          actionName: onClick.actionName,
+                          actionArgument: onClick.actionArgument,
                       })
                     : undefined,
 

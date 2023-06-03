@@ -44,7 +44,7 @@ app.post("/web_hook", async (request, response) => {
 			let actionArg: IViberActionArg | undefined = { link: '' };
 			try {
 				actionArg = JSON.parse(body.message.tracking_data || body.message.text) as IViberActionArg;
-			} catch {
+			} catch  {
 				actionArg = { link: '' };
 			}
 			const result = await renderToStringAsync({

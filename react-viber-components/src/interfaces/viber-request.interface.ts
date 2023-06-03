@@ -5,5 +5,5 @@ import { IViberMessage } from './viber-message.interface';
 export interface IViberRequest {
     body?: IViberMessage;
     conversation_started_body?: IViberConversationStartedMessage;
-    actionArg: IViberActionArg;
+    actionArg: IViberActionArg | undefined;
 }

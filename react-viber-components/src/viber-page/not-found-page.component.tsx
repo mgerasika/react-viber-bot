@@ -16,10 +16,9 @@ export const NotFoundPage = ({ request: { body } }: IProps): JSX.Element => {
             sender={body?.sender as IViberSender}
             text={'Сторінку не знайдено'}
             keyboard={
-                <ViberKeyboard>
-                    <ViberButton Columns={3} Rows={1} Text="На головну" arg={{ link: VIBER_LINKS.index }} />,
-                    <ViberButton Columns={3} Rows={1} Text="Вийти" arg={{ link: VIBER_LINKS.exit }} />
-                </ViberKeyboard>
+                <ViberKeyboard buttons={<> <ViberButton Columns={3} Rows={1} Text="На головну" onClick={{ link: VIBER_LINKS.index }} />,
+                    <ViberButton Columns={3} Rows={1} Text="Вийти" onClick={{ link: VIBER_LINKS.exit }} /></>} />
+                   
             }
         />
     );

@@ -17,7 +17,7 @@ export const WelcomePage = ({ request: { conversation_started_body } }: IProps):
             text={'Привіт! Це чат бот ОСББ Парус Смарт'}
             keyboard={
                 <ViberKeyboard>
-                    <ViberButton Columns={3} Rows={1} Text="Почати" arg={{ link: VIBER_LINKS.index }} />
+                    <ViberButton Columns={3} Rows={1} Text="Почати" onClick={{ link: VIBER_LINKS.index }} />
                 </ViberKeyboard>
             }
         />

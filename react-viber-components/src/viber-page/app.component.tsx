@@ -1,6 +1,5 @@
 import { VIBER_LINKS } from '@src/constants/viber-links.constant';
-import { IViberRequest } from '@src/interfaces/viber-request.interface';
-import React from 'react';
+import React, { useContext } from 'react';
 import { ContactsPage } from './contacts-page.component';
 import { DocumentsPage } from './documents-page.component';
 import { ExitPage } from './exit-page.component';
@@ -11,11 +10,12 @@ import { NewsPage } from './news-page.component';
 import { NotFoundPage } from './not-found-page.component';
 import { PersonalPage } from './personal-page.component';
 import { WelcomePage } from './welcome-page.component';
+import { ViberServerContext } from '@src/shared/viber-server.context';
 
-interface IProps {
-    request: IViberRequest;
-}
-export const App = ({ request }: IProps): JSX.Element => {
+
+export const App = (): JSX.Element => {
+	const request = useContext(ViberServerContext).request;
+	
     const {
         actionArg: { link },
     } = request;

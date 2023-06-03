@@ -7,7 +7,7 @@ import { IViberRequest } from '@src/interfaces/viber-request.interface';
 import { IViberSender } from '@src/interfaces/viber-sender.interface';
 import { calcPaging } from '@src/utils/calc-paging.util';
 import { Paging } from '@src/viber-components/paging.component';
-import { useServerPromise } from '@src/viber-components/use-server-promise.hook';
+import { useServerQuery } from '@src/viber-components/use-server-query.hook';
 import { ViberButton } from '@src/viber-components/viber-button.component';
 import { ViberCard } from '@src/viber-components/viber-card.component';
 import { ViberKeyboard } from '@src/viber-components/viber-keyboard.component';
@@ -20,8 +20,7 @@ interface IProps {
 }
 
 export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Element => {
-    const [articles] = useServerPromise<IApiResult<IArticleDto[]>>(
-        undefined,
+    const [articles] = useServerQuery<IApiResult<IArticleDto[]>>(
         'articles',
 		() => Promise.resolve({
 			data: [{
@@ -42,7 +41,6 @@ export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Ele
     });
     return (
         <ViberMessage
-            type={EViberMessageType.rich_media}
             sender={body?.sender as IViberSender}
             keyboard={
                 <ViberKeyboard>
@@ -51,7 +49,7 @@ export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Ele
                 ActionType={'reply'}
                 Columns={2}
                 Rows={1}
-                arg={{
+                onClick={{
                     link,
                     actionName: LINKS.index.toString(),
                     actionArgument: currentPage - 1,
@@ -61,7 +59,7 @@ export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Ele
 					Columns={6}
 					Rows={1}
 					Text="На головну"
-					arg={{
+					onClick={{
 						link: VIBER_LINKS.index,
 					}}
 				/>
