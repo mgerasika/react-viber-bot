@@ -3,6 +3,9 @@ import { IPromiseResultInfo, IViberContext, ViberServerContext } from '../shared
 import { App } from '@src/viber-page/app.component';
 import React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
+import { IViberMessage } from '@src/interfaces/viber-message.interface';
+import { IViberResponse } from '@src/interfaces/viber-response.interface';
+import { EViberMessageType } from '@src/enums/viber-message-type.enum';
 
 export interface IRenderToStringResult {
     json?: any;
@@ -38,13 +41,17 @@ export const renderToStringAsync = async (request: IViberRequest): Promise<IRend
     let html;
 	let renderCount = 0;
 	const dt1 = (new Date()).getTime();
-    do {
+	do {
+		//clear previous render 
 		promises = [];
+
 		Object.keys(promiseResults).forEach(key => {
 			if (promiseResults[key]) {
 				(promiseResults[key] as any).isInitialized = false;
 			}
-		})
+		});
+
+		//render to string
         html = ReactDOMServer.renderToString(
             <ViberServerContext.Provider value={contextValue}>
                 <App />
@@ -60,7 +67,7 @@ export const renderToStringAsync = async (request: IViberRequest): Promise<IRend
 	const dt2 = (new Date()).getTime();
 	console.log(`render count=${renderCount} total time = ${dt2 - dt1}ms`);
 
-	let text = html2text(html);
+	let text =   html2text(html);
 	text = text.replaceAll(/,,/g, ',');	
 	text = text.replaceAll(/,,/g, ',');	
 	text = text.replaceAll(',}', '}');

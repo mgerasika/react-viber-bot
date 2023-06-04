@@ -4,6 +4,7 @@ import { EViberMessageType } from '@src/enums/viber-message-type.enum';
 import { useRequest } from '@src/hooks/use-request.hook';
 import { useServerCallback } from '@src/hooks/use-server-callback.hook';
 import { useServerMutation } from '@src/hooks/use-server-mutation.hook';
+import { useServerRoute } from '@src/hooks/use-server-route';
 import { useServerState } from '@src/hooks/use-server-state.hook';
 import { useServerTimeout } from '@src/hooks/use-server-timeout.hook';
 import { IApiResult } from '@src/interfaces/api-result.interface';
@@ -56,6 +57,11 @@ export const NewsPage = (): JSX.Element => {
 	const handleTimeoutClick = useServerCallback('timeoutClick', (e) => {
 		request();
 	});
+
+	const {navigate } = useServerRoute('navigateTo');
+	const handleNavigateClick = useServerCallback('navigateTo', () => {
+		navigate(LINKS.index.toString());
+	});
 	
     return (
         <ViberMessage
@@ -69,6 +75,8 @@ export const NewsPage = (): JSX.Element => {
 						<ViberButton Columns={2} Rows={1} Text='Share Phone Button' actionType='share-phone' onClick={handleCancelClick} />
 						<ViberButton Columns={2} Rows={1} Text='None Button' actionType='none' onClick={handleCancelClick} />
 						<ViberButton Columns={2} Rows={1} Text='Timeout' actionType='reply' onClick={handleTimeoutClick} />
+						<ViberButton Columns={2} Rows={1} Text='Navigate from here' actionType='reply' onClick={handleNavigateClick} />
+						<ViberButton Columns={2} Rows={1} Text='Server Route' actionType='reply' onClick={handleTimeoutClick} />
 						<ViberButton Columns={2} Rows={1} Text='Back' actionType='reply' onClick={{ actionName: 'На головну', link: LINKS.index.toString() }} />
 						<ViberButton Columns={2} Rows={1} Text='Back' actionType='reply' onClick={handleBackClick} />
 					</>}
