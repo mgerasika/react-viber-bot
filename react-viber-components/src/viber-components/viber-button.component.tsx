@@ -4,27 +4,60 @@ import { ILinkItem } from '@src/utils/make-links.util';
 import React from 'react';
 import { Json } from './json.component';
 
-interface IProps {
-    onClick:
+interface ICommonProps {
+    Text: string;
+    Columns: number;
+	Rows: number;
+	onClick?:
         | (Omit<IViberActionArg, 'link'> & {
               link: ILinkItem;
           })
         | undefined;
-
-    Text: string;
-    Columns: number;
-    ActionType?: 'reply' | 'share-phone' | 'location-picker' | 'open-url' | 'none' | 'payment';
-    Rows: number;
 }
-export const ViberButton = ({ onClick, Columns, Rows, Text, ActionType = 'reply' }: IProps): JSX.Element => {
+
+interface IOtherProps extends ICommonProps {
+	actionType: 'reply' | 'share-phone' | 'location-picker' |  'none' | 'payment';
+}
+
+
+interface IOpenUrlProps extends ICommonProps {
+	actionType: 'open-url';
+	href: string;
+}
+type IProps = IOtherProps | IOpenUrlProps;
+
+export const LINK_AND_METADATA_SEPARATOR = '#';
+export const ViberButton = ({ Columns, Rows, Text, onClick, actionType, ...rest }: IProps): JSX.Element => {
+	if (actionType === 'open-url') {
+		const props = rest as IOpenUrlProps;
+		return (
+		<Json
+			addComa
+            json={{
+                Columns,
+                Rows,
+				Text,
+				ActionType: actionType,
+                ActionBody: onClick
+                    ? props.href + LINK_AND_METADATA_SEPARATOR+ getViberActionId({
+                          link: onClick?.link,
+                          actionName: onClick.actionName,
+                          actionArgument: onClick.actionArgument,
+                      })
+                    : props.href,
+                TextSize: 'regular',
+            }}
+        />
+    );
+	}
     return (
 		<Json
 			addComa
             json={{
                 Columns,
                 Rows,
-                Text,
-                ActionType,
+				Text,
+                ActionType: actionType,
                 ActionBody: onClick
                     ? getViberActionId({
                           link: onClick?.link,

@@ -1,8 +1,23 @@
 import { IViberRequest } from '@src/interfaces/viber-request.interface';
 import React from 'react';
-export interface IViberContext {
-	promises: Promise<any>[],
-	promiseResults: any;
-	request: IViberRequest;
+export interface IPromiseResultInfo {
+	isFinished: boolean
+	isInitialized:boolean
+	data?: any;
 }
-export const ViberServerContext = React.createContext<IViberContext>({ promises: [], promiseResults: {} as any, request:{} as IViberRequest });
+export interface IViberContext {
+	request: IViberRequest;
+	hasFinishedPromise: (key: string) => boolean;
+	addPromise: (promise: Promise<any>) => void;
+	getPromiseResult: (key:string) => IPromiseResultInfo | undefined,
+	updatePromiseResult: (key:string, result: Partial<IPromiseResultInfo>) => void;
+}
+export const ViberServerContext = React.createContext<IViberContext>(
+	{
+		getPromiseResult: () => undefined,
+		hasFinishedPromise: () => false,
+		addPromise: () => null,
+		updatePromiseResult: () => null,
+		request: {} as unknown as IViberRequest
+
+	});

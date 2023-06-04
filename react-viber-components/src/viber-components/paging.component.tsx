@@ -17,7 +17,7 @@ export const Paging = ({ link, currentPage, totalPages }: IProps): JSX.Element =
     return (
         <>
             <ViberButton
-                ActionType={currentPage === 0 ? 'none' : 'reply'}
+                actionType={currentPage === 0 ? 'none' : 'reply'}
                 Text={currentPage === 0 ? '' : 'Попередня'}
                 Columns={2}
                 Rows={1}
@@ -29,7 +29,7 @@ export const Paging = ({ link, currentPage, totalPages }: IProps): JSX.Element =
             />
             ,
             <ViberButton
-                ActionType="none"
+                actionType="none"
                 onClick={undefined}
                 Columns={2}
                 Rows={1}
@@ -37,7 +37,7 @@ export const Paging = ({ link, currentPage, totalPages }: IProps): JSX.Element =
             />
             ,
             <ViberButton
-                ActionType={currentPage === totalPages - 1 ? 'none' : 'reply'}
+                actionType={currentPage === totalPages - 1 ? 'none' : 'reply'}
                 Text={currentPage === totalPages - 1 ? '' : 'Наступна'}
                 Columns={2}
                 Rows={1}

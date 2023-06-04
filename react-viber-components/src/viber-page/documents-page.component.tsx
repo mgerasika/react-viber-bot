@@ -46,7 +46,7 @@ export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Ele
                 <ViberKeyboard>
 					<ViberButton
 						Text="Купи мене"
-                ActionType={'reply'}
+                actionType={'reply'}
                 Columns={2}
                 Rows={1}
                 onClick={{

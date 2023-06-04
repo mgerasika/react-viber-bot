@@ -19,7 +19,8 @@ import { IViberConversationStartedMessage } from "./interfaces/viber-conversatio
 import { IViberMessage } from "./interfaces/viber-message.interface";
 import { IViberResponse } from "./interfaces/viber-response.interface";
 import { IViberUnsubscribeMessage } from "./interfaces/viber-unsubscribe.interface";
-import { renderToStringAsync } from "./viber-components/render-to-string-async";
+import { renderToStringAsync } from "./utils/render-to-string-async.util";
+import { LINK_AND_METADATA_SEPARATOR } from "./viber-components/viber-button.component";
 
 
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -42,9 +43,11 @@ app.post("/web_hook", async (request, response) => {
 		if (requestBody.event === EViberEventType.message) {
 			const body = requestBody as IViberMessage;
 			let actionArg: IViberActionArg | undefined = { link: '' };
+			const input = body.message.tracking_data || body.message.text?.split(LINK_AND_METADATA_SEPARATOR).pop() || '';
 			try {
-				actionArg = JSON.parse(body.message.tracking_data || body.message.text) as IViberActionArg;
-			} catch  {
+				actionArg = JSON.parse(input) as IViberActionArg;
+			} catch (ex) {
+				console.error('error parse input argument input = ',input)
 				actionArg = { link: '' };
 			}
 			const result = await renderToStringAsync({

@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import { Json } from './json.component';
 
 interface IBaseProps {
-	sender: IViberSender;
+	sender: IViberSender | undefined;
     keyboard?: ReactNode;
     tracking_data?: string;
 }
@@ -27,7 +27,7 @@ export const ViberMessage = ({
 		return (
 			<Json
 				json={{
-					receiver: sender.id,
+					receiver: sender?.id,
 					text: (rest as ITextProps).text || '',
 					min_api_version: 7,
 					tracking_data,
@@ -42,7 +42,7 @@ export const ViberMessage = ({
 		return  (
 			<Json
 				json={{
-					receiver: sender.id,
+					receiver: sender?.id,
 					min_api_version: 7,
 					tracking_data,
 					type: EViberMessageType.rich_media,

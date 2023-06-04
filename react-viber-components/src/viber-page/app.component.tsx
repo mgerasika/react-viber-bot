@@ -31,7 +31,7 @@ export const App = (): JSX.Element => {
             return <ExitPage request={request} />;
 
         case VIBER_LINKS.news.toString():
-            return <NewsPage request={request} />;
+            return <NewsPage />;
 
         case VIBER_LINKS.documents.toString():
             return <DocumentsPage request={request} />;

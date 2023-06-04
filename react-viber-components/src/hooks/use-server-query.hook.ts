@@ -1,15 +1,24 @@
 import { IViberContext, ViberServerContext } from '@src/shared/viber-server.context';
 import { useContext } from 'react';
+import { useUnique } from './use-unique.hook';
 
-export function useServerQuery<T>( key: string, callback: () => Promise<T>): [T | undefined | null] {
-    const context: IViberContext = useContext(ViberServerContext);
-    const data = context.promiseResults[key];
-	if (context.promises && !Object.keys(context.promiseResults).includes(key)) {
+export function useServerQuery<T>(name: string, callback: () => Promise<T>): [T | undefined | null] {
+	const key = useUnique('useServerQuery', name);
+	const context: IViberContext = useContext(ViberServerContext);
+	context.updatePromiseResult(key, {
+		isInitialized: true
+	});
+
+    const data = context.getPromiseResult(key)?.data;
+	if ( !context.hasFinishedPromise(key)) {
 		const promise = callback();
-		const promiseRes = promise.then((data) => {
-			context.promiseResults[key] = data;
-		});
-		context.promises.push(promiseRes);
+		
+		context.addPromise(promise.then((data) => {
+			context.updatePromiseResult(key,{
+				isFinished: true,
+				data
+			});
+		}));
     }
     return [data];
 }
