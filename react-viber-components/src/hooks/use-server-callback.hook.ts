@@ -6,7 +6,7 @@ import { useUnique } from "./use-unique.hook";
 
 interface IClickArgs{
 	actionName: string;
-	actionArg: any;
+	actionArgument: any;
 }
 export function useServerCallback(name: string, callback: (args: IClickArgs) => void): IViberActionArg {
 	const key = useUnique('useServerCallback', name);
@@ -16,11 +16,11 @@ export function useServerCallback(name: string, callback: (args: IClickArgs) => 
 	});
 
 	const request = context.request;
-	const result: IViberActionArg = { actionName: key, link: LINKS.news.toString() };
+	const result: IViberActionArg = { actionName: key, link: request.actionArg?.link || '' };
 
 	if ( !context.hasFinishedPromise(key) &&  request?.actionArg?.link === result.link && request.actionArg.actionName === result.actionName) {
-		callback({ actionName: request.actionArg.actionName || '', actionArg: request.actionArg.actionArgument });
-		context.updatePromiseResult(key,{
+		callback({ actionName: request.actionArg.actionName || '', actionArgument: request.actionArg.actionArgument });
+			context.updatePromiseResult(key,{
 			isFinished:true
 		});
 	}

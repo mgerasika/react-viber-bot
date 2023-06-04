@@ -34,12 +34,25 @@ export const NewsPage = (): JSX.Element => {
 	
 	const [message, setMessage] = useServerState('message', '&');
 
-	const handleReplyButtonClick = useServerCallback('okClick', (e) => {
+	const handleReplyButtonClick = useServerCallback('handleReplyButtonClick', (e) => {
 		setMessage('<Button></Button>');
 	});
-	const handleCancelClick = useServerCallback('okClick1', (e) => {
+	const handleCancelClick = useServerCallback('handleCancelClick', (e) => {
 		setMessage(e.actionName);
 	});
+
+		const handleOpenClick = useServerCallback('handleOpenClick', (e) => {
+		setMessage(e.actionName);
+	});
+
+	const handleSharePhoneClick = useServerCallback('handleSharePhoneClick', (e) => {
+		setMessage(e.actionName);
+		console.log('share phone callback again????');
+	});
+
+	if (body?.message.contact?.phone_number) {
+		console.log('phone', body?.message.contact?.phone_number)
+	}
 	
 	const handleBackClick = useServerCallback('server-callback', (e) => {
 		const context = useContext(ViberServerContext);
@@ -48,18 +61,18 @@ export const NewsPage = (): JSX.Element => {
 		};
 	});
 
-	const { callback: request } = useServerTimeout('timeout', () => {
+	const { callback: request } = useServerTimeout('useServerTimeout', () => {
 		setMessage('some code with delay');
 
 		implantMutate();
 	}, 2000);
 
-	const handleTimeoutClick = useServerCallback('timeoutClick', (e) => {
+	const handleTimeoutClick = useServerCallback('handleTimeoutClick', (e) => {
 		request();
 	});
 
 	const {navigate } = useServerRoute('navigateTo');
-	const handleNavigateClick = useServerCallback('navigateTo', () => {
+	const handleNavigateClick = useServerCallback('handleNavigateClick', () => {
 		navigate(LINKS.index.toString());
 	});
 	
@@ -70,9 +83,9 @@ export const NewsPage = (): JSX.Element => {
 				<ViberKeyboard
 					buttons={<>
 						<ViberButton Columns={2} Rows={1} Text='Reply button' actionType='reply' onClick={handleReplyButtonClick} />
-						<ViberButton Columns={2} Rows={1} Text='Open Url button' href={'http://www.google.com'} actionType='open-url' onClick={handleCancelClick}   />
+						<ViberButton Columns={2} Rows={1} Text='Open Url button' href={'http://www.google.com'} actionType='open-url' onClick={handleOpenClick}   />
 						<ViberButton Columns={2} Rows={1} Text='Location Picker Button' actionType='location-picker' onClick={handleCancelClick} />
-						<ViberButton Columns={2} Rows={1} Text='Share Phone Button' actionType='share-phone' onClick={handleCancelClick} />
+						<ViberButton Columns={2} Rows={1} Text='Share Phone Button' actionType='share-phone' onClick={handleSharePhoneClick} />
 						<ViberButton Columns={2} Rows={1} Text='None Button' actionType='none' onClick={handleCancelClick} />
 						<ViberButton Columns={2} Rows={1} Text='Timeout' actionType='reply' onClick={handleTimeoutClick} />
 						<ViberButton Columns={2} Rows={1} Text='Navigate from here' actionType='reply' onClick={handleNavigateClick} />

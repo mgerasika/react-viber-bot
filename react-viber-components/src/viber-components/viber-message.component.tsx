@@ -1,12 +1,12 @@
 import { EViberMessageType } from '@src/enums/viber-message-type.enum';
 import { IViberSender } from '@src/interfaces/viber-sender.interface';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useReducer } from 'react';
 import { Json } from './json.component';
+import { useRequest } from '@src/hooks/use-request.hook';
 
 interface IBaseProps {
 	sender: IViberSender | undefined;
     keyboard?: ReactNode;
-    tracking_data?: string;
 }
 interface ITextProps extends IBaseProps {
     text: string | undefined;
@@ -20,9 +20,9 @@ type IProps = IRichProps | ITextProps;
 export const ViberMessage = ({
     sender,
     keyboard,
-	tracking_data,
 	...rest
 }: IProps): JSX.Element => {
+	const {  tracking_data } = useRequest();
 	if ((rest as ITextProps).text ) {
 		return (
 			<Json
@@ -30,7 +30,7 @@ export const ViberMessage = ({
 					receiver: sender?.id,
 					text: (rest as ITextProps).text || '',
 					min_api_version: 7,
-					tracking_data,
+					// tracking_data, // got problem, need investigate more
 					type: EViberMessageType.text,
 				}}
 			>
@@ -44,7 +44,7 @@ export const ViberMessage = ({
 				json={{
 					receiver: sender?.id,
 					min_api_version: 7,
-					tracking_data,
+					// tracking_data, // got problem, need investigate more
 					type: EViberMessageType.rich_media,
 				}}
 			>

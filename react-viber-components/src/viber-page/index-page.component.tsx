@@ -19,8 +19,6 @@ export enum EIndexAction {
 }
 
 export const IndexPage = ({ request: { body } }: IProps): JSX.Element => {
-   
-
     return (
         <ViberMessage
             sender={body?.sender as IViberSender}

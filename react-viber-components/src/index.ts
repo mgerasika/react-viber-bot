@@ -53,6 +53,7 @@ app.post("/web_hook", async (request, response) => {
 			const result = await renderToStringAsync({
 				body,
 				actionArg,
+				tracking_data: body.message.tracking_data
 			});
 			resObj = {
 				message: result.json,
