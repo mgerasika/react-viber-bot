@@ -6,7 +6,6 @@ import { IViberResponse } from "./interfaces/viber-response.interface";
 import { IViberUnsubscribeMessage } from "./interfaces/viber-unsubscribe.interface";
 import { renderToStringAsync } from "./utils/render-to-string-async.util";
 import { LINK_AND_METADATA_SEPARATOR } from "./viber-components/viber-button.component";
-import { LINKS } from "./constants/links.constant";
 
 export  const createExpressCallback = (reactApp:any) => async (request:any, response:any) => {
 	try {
@@ -40,7 +39,7 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 				conversation_started_body: body,
 
 				actionArg: {
-					link: LINKS.welcome.toString(),
+					link: '/',
 				},
 			});
 			resObj = {
