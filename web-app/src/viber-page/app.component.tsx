@@ -1,12 +1,12 @@
+import { useRequest } from '@viber-common/hooks/use-request.hook';
 import { DocumentsPage } from './documents-page.component';
 import { ExitPage } from './exit-page.component';
 import { IndexPage } from './index-page.component';
 import { NewsPage } from './news-page.component';
 import { NotFoundPage } from './not-found-page.component';
 import { WelcomePage } from './welcome-page.component';
-import { useRequest } from '@src/hooks/use-request.hook';
 import { LINKS } from '@src/constants/links.constant';
-import { IViberBodyRequest, IViberConversationStartedRequest } from '@src/interfaces/viber-request.interface';
+import { IViberConversationStartedRequest, IViberBodyRequest } from '@viber-common/interfaces/viber-request.interface';
 
 
 export const App = (): JSX.Element => {

@@ -1,5 +1,5 @@
+import { Json } from '@viber-common/viber-components/json.component';
 import React from 'react';
-import { Json } from '../viber-components/json.component';
 
 const { markdownToTxt } = require('markdown-to-txt');
 

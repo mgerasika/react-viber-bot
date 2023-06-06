@@ -1,8 +1,8 @@
 {
-  "name": "web-app",
+  "name": "viber-common",
   "version": "0.1.8",
   "private": false,
-  "main": "dist/web-app/src/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -45,7 +45,6 @@
     "markdown-to-txt": "^2.0.1",
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.20",
-    "pg": "^8.8.0",
     "prettier": "2.3.2",
     "prettier-plugin-organize-imports": "^1.1.1",
     "react": "^18.2.0",
@@ -64,7 +63,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/web-app/src/index.js\"",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "ts": "npx ts-node scripts/codegen.ts",
     "stylelint": "stylelint **/*.scss",
     "stylelint:fix": "stylelint **/*.scss --fix",

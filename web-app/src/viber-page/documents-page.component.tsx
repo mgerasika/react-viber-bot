@@ -1,10 +1,11 @@
 import { LINKS } from '@src/constants/links.constant';
-import { IViberBodyRequest } from '@src/interfaces/viber-request.interface';
-import { ViberButton } from '@src/viber-components/viber-button.component';
-import { ViberCard } from '@src/viber-page/viber-card.component';
-import { ViberKeyboard } from '@src/viber-components/viber-keyboard.component';
-import { ViberMessage } from '@src/viber-components/viber-message.component';
-import { ViberRichMedia } from '@src/viber-components/viber-rich-media.component';
+import { IViberBodyRequest } from '@viber-common/interfaces/viber-request.interface';
+import { ViberButton } from '@viber-common/viber-components/viber-button.component';
+import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
+import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
+import { ViberCard } from './viber-card.component';
+import { ViberRichMedia } from '@viber-common/viber-components/viber-rich-media.component';
+
 
 interface IProps {
 	request: IViberBodyRequest;

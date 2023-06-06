@@ -1,6 +1,7 @@
-import { IViberBodyRequest } from '@src/interfaces/viber-request.interface';
-import { IViberReceiver } from '@src/interfaces/viber-sender.interface';
-import { ViberMessage } from '@src/viber-components/viber-message.component';
+
+import { IViberBodyRequest } from '@viber-common/interfaces/viber-request.interface';
+import { IViberReceiver } from '@viber-common/interfaces/viber-sender.interface';
+import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
 import React from 'react';
 
 interface IProps {

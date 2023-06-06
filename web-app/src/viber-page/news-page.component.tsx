@@ -1,19 +1,16 @@
 import { LINKS } from '@src/constants/links.constant';
-import { useRequest } from '@src/hooks/use-request.hook';
-import { useServerMutation } from '@src/hooks/use-server-mutation.hook';
-import { useServerRoute } from '@src/hooks/use-server-route';
-import { useServerState } from '@src/hooks/use-server-state.hook';
-import { useServerTimeout } from '@src/hooks/use-server-timeout.hook';
-import { Paging } from '@src/viber-components/paging.component';
-import { ViberButton } from '@src/viber-components/viber-button.component';
-import { ViberKeyboard } from '@src/viber-components/viber-keyboard.component';
-import { ViberMessage } from '@src/viber-components/viber-message.component';
-import { useServerActionBody } from '@src/hooks/use-server-action-body.hook';
-import { IViberBodyRequest } from '@src/interfaces/viber-request.interface';
-
+import { IViberBodyRequest } from '@viber-common/interfaces/viber-request.interface';
+import { ViberButton } from '@viber-common/viber-components/viber-button.component';
+import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
+import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
+import { useRequest } from '@viber-common/hooks/use-request.hook';
+import { useServerMutation } from '@viber-common/hooks/use-server-mutation.hook';
+import { useServerState } from '@viber-common/hooks/use-server-state.hook';
+import { useServerActionBody } from '@viber-common/hooks/use-server-action-body.hook';
+import { useServerTimeout } from '@viber-common/hooks/use-server-timeout.hook';
+import { useServerRoute } from '@viber-common/hooks/use-server-route';
 
 export const NewsPage = (): JSX.Element => {
-	
 	const { body, actionArg } = useRequest() as IViberBodyRequest;
 	const {data, mutate: implantMutate} = useServerMutation<string>(
 		'implants',
@@ -79,7 +76,7 @@ export const NewsPage = (): JSX.Element => {
 							<ViberButton Columns={2} Rows={1} Text='Navigate from here' actionType='reply' actionBody={handleNavigateClick} />
 							
 							<ViberButton Columns={2} Rows={1} Text='Server Route' actionType='reply' actionBody={handleTimeoutClick} />
-							<Paging currentPage={+actionArg?.actionArgument || 0} totalPages={3} onChange={handleChange} />
+							{/* <Paging currentPage={+actionArg?.actionArgument || 0} totalPages={3} onChange={handleChange} /> */}
 							
 							<ViberButton Columns={6} Rows={1} Text='Back' actionType='reply' actionBody={{link: LINKS.index.toString()}} />
 						</>
@@ -93,3 +90,5 @@ export const NewsPage = (): JSX.Element => {
         />
     );
 };
+
+

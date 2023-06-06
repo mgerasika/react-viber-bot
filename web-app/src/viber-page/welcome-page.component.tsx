@@ -1,9 +1,10 @@
 import { LINKS } from '@src/constants/links.constant';
-import { IViberConversationStartedRequest } from '@src/interfaces/viber-request.interface';
-import { IViberReceiver } from '@src/interfaces/viber-sender.interface';
-import { ViberButton } from '@src/viber-components/viber-button.component';
-import { ViberKeyboard } from '@src/viber-components/viber-keyboard.component';
-import { ViberMessage } from '@src/viber-components/viber-message.component';
+import { IViberConversationStartedRequest } from '@viber-common/interfaces/viber-request.interface';
+import { IViberReceiver } from '@viber-common/interfaces/viber-sender.interface';
+import { ViberButton } from '@viber-common/viber-components/viber-button.component';
+import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
+import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
+
 import React from 'react';
 
 interface IProps {
