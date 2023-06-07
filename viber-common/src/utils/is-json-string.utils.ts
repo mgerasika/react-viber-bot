@@ -1,0 +1,1 @@
+export const isJsonString = (input: string) => input.trim().startsWith('{') && input.trim().endsWith('}');

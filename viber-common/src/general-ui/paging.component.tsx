@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViberButton } from './viber-button.component';
+import { Button } from './button.component';
 import { useServerActionBody } from '@viber-common/hooks/use-server-action-body.hook';
 
 interface IProps {
@@ -20,29 +20,29 @@ export const Paging = ({  currentPage, totalPages, onChange }: IProps): JSX.Elem
 	});
     return (
         <>
-            <ViberButton
-                actionType={currentPage === 0 ? 'none' : 'reply'}
+            <Button
+                ActionType={currentPage === 0 ? 'none' : 'reply'}
                 Text={currentPage === 0 ? '' : 'Попередня'}
                 Columns={2}
                 Rows={1}
-				actionBody={{
+				ActionBody={{
 					...handlePrevClick,
                     actionArgument: currentPage - 1,
                 }}
             />
-            <ViberButton
-                actionType="none"
-                actionBody={undefined}
+            <Button
+                ActionType="none"
+                ActionBody={undefined}
                 Columns={2}
                 Rows={1}
                 Text={`${currentPage + 1} з ${totalPages}`}
             />
-            <ViberButton
-                actionType={currentPage === totalPages - 1 ? 'none' : 'reply'}
+            <Button
+                ActionType={currentPage === totalPages - 1 ? 'none' : 'reply'}
                 Text={currentPage === totalPages - 1 ? '' : 'Наступна'}
                 Columns={2}
                 Rows={1}
-                actionBody={{
+                ActionBody={{
                    ...handleNextClick,
                     actionArgument: currentPage + 1,
                 }}

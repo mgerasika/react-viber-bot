@@ -2,17 +2,20 @@ import React, { ReactNode } from 'react';
 import { Json } from './json.component';
 
 interface IProps {
-    buttons?: ReactNode;
+	Buttons?: ReactNode;
+	ButtonsGroupColumns?: 1|2|3|4|5|6,
+	ButtonsGroupRows?: 1 | 2 | 3 | 4 | 5 | 6 | 7,
+	BgColor?: string;
 }
-export const ViberRichMedia = ({ buttons: buttons }: IProps): JSX.Element => {
+export const ViberRichMedia = ({ Buttons, ...rest }: IProps): JSX.Element => {
     return (
         <Json
             json={{
-                Type: 'rich_media',
-                BgColor: '#FFFFFF',
+				Type: 'rich_media',
+				...rest
             }}
         >
-            {buttons ? <>,"Buttons":[{buttons}]</> : null}
+            {Buttons ? <>,"Buttons":[{Buttons}]</> : null}
         </Json>
     );
 };

@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react';
 import { Json } from './json.component';
 
 interface IProps {
-    buttons?:  ReactNode[] | ReactNode;
+    Buttons?:  ReactNode[] | ReactNode;
 }
-export const ViberKeyboard = ({ buttons }: IProps): JSX.Element => {
+export const ViberKeyboard = ({ Buttons: buttons }: IProps): JSX.Element => {
     return (
         <Json
             json={{

@@ -5,7 +5,9 @@ import { IViberMessage } from "./interfaces/viber-message.interface";
 import { IViberResponse } from "./interfaces/viber-response.interface";
 import { IViberUnsubscribeMessage } from "./interfaces/viber-unsubscribe.interface";
 import { renderToStringAsync } from "./utils/render-to-string-async.util";
-import { LINK_AND_METADATA_SEPARATOR } from "./viber-components/viber-button.component";
+import { LINK_AND_METADATA_SEPARATOR } from "./general-ui/button.component";
+import { isJsonString } from "./utils/is-json-string.utils";
+
 
 export  const createExpressCallback = (reactApp:any) => async (request:any, response:any) => {
 	try {
@@ -15,18 +17,21 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 		let resObj: IViberResponse | undefined = undefined;
 		if (requestBody.event === EViberEventType.message) {
 			const body = requestBody as IViberMessage;
-			let actionArg: IViberActionArg | undefined = { link: '' };
-			const input = body.message.tracking_data || body.message.text?.split(LINK_AND_METADATA_SEPARATOR).pop() || '';
+			let actionArg: IViberActionArg = { link: '' };
+			const input = isJsonString(body.message.text || '') ? body.message.text?.split(LINK_AND_METADATA_SEPARATOR).pop() || '' : body.message.tracking_data || '';
+			
+			console.log('try parse input = ' + input);
 			try {
 				actionArg = JSON.parse(input) as IViberActionArg;
 			} catch (ex) {
-				console.error('error parse input argument input = ',input)
+				console.error('error parse input argument input = ', input);
 				actionArg = { link: '' };
 			}
 			const result = await renderToStringAsync(reactApp, {
-				body,
+				body_request: body ,
+				conversation_started_request: undefined,
 				actionArg,
-				tracking_data: body.message.tracking_data
+				trackingData: undefined,
 			});
 			resObj = {
 				message: result.json,
@@ -36,11 +41,12 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 			console.log('subscribe', body);
 
 			const result = await renderToStringAsync(reactApp,{
-				conversation_started_body: body,
-
+				conversation_started_request: body,
+				body_request: undefined,
 				actionArg: {
 					link: '/',
 				},
+				trackingData:undefined,
 			});
 			resObj = {
 				message: result.json,

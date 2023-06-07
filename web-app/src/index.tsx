@@ -14,7 +14,6 @@ const path = require('path');
 moduleAlias.addAlias('@viber-common', path.resolve(__dirname, '../..') + '/viber-common/src');
 moduleAlias.addAlias('@src', path.resolve(__dirname, '../..') + '../../dist/web-app/src');
 
-
 import { createExpressCallback } from '../../viber-common/src/express-callback';
 import { App } from "./viber-page/app.component";
 

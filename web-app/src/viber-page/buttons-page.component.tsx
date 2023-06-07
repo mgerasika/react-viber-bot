@@ -1,73 +1,67 @@
 import { LINKS } from '@src/constants/links.constant';
-import { IViberBodyRequest } from '@viber-common/interfaces/viber-request.interface';
-import { ViberButton } from '@viber-common/viber-components/viber-button.component';
+import {  Button } from '@viber-common/general-ui/button.component';
 import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
 import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { ViberCard } from './viber-card.component';
+import { ViberCard } from '../../../viber-common/src/general-ui/viber-card.component';
 import { ViberRichMedia } from '@viber-common/viber-components/viber-rich-media.component';
+import { LinkButton } from '@viber-common/general-ui/link-button.component';
+import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
 
 
-interface IProps {
-	request: IViberBodyRequest;
-}
-
-export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Element => {
+export const ButtonsPage = (): JSX.Element => {
+	const { body_request } = useViberRequest();
+	if (!body_request) {
+		return <></>;
+	}
 	const items = ['a', 'b', 'c', 'd'];
 	return (
 		<ViberMessage
-			receiver={body.sender}
+			receiver={body_request.sender}
 			keyboard={
 				<ViberKeyboard
-					buttons={
+					Buttons={
 						<>
-							<ViberButton
+							<Button
+								name="reply"
 								Text="Reply Button"
-								actionType='reply'
+								ActionType='reply'
 								Columns={2}
 								Rows={1}
-								actionBody={actionArg}
 
 							/>
-							<ViberButton
+							<Button
+								name="location"
 								Text="Location Picker Button"
-								actionType='location-picker'
+								ActionType='location-picker'
 								Columns={2}
 								Rows={1}
-								actionBody={actionArg}
 							/>
-							<ViberButton
+							<Button
+								name="share"
 								Text="Share Phone Button"
-								actionType='share-phone'
+								ActionType='share-phone'
 								Columns={2}
 								Rows={1}
-								actionBody={actionArg}
 							/>
-							<ViberButton
+							<Button
+								name="none"
 								Text="None Button"
-								actionType='none'
+								ActionType='none'
 								Columns={2}
 								Rows={1}
-								actionBody={actionArg}
-							/>
-							<ViberButton
-								Text="Open Url Button"
-								href='https://google.com.ua'
-								actionType='open-url'
-								Columns={2}
-								Rows={1}
-								actionBody={actionArg}
 							/>
 							
-							<ViberButton
-								actionType='reply'
+							
+							<LinkButton
+								name="back"
+								ActionType='reply'
 								Columns={6}
 								Rows={1}
 								Text="Back"
 
-								actionBody={{
-									...actionArg,
-									link: LINKS.index
-								}}
+								link={
+									LINKS.index.toString()
+								}
 
 							/>
 						</>
@@ -76,7 +70,7 @@ export const DocumentsPage = ({ request: { actionArg, body } }: IProps): JSX.Ele
 			}
 			rich_media={
 				<ViberRichMedia
-					buttons={
+					Buttons={
 						<>
 							{items.map((article) => (
 								<div key={article}>

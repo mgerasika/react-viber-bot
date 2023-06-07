@@ -24,6 +24,6 @@
       "@viber-common/*": ["../viber-common/src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../viber-common/src/general-ui/viber-card.component.tsx"],
   "exclude": ["node_modules", "dist"]
 }
