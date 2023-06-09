@@ -13,15 +13,15 @@ import { MessagesPage } from './messages-page.component';
 
 
 export const App = (): JSX.Element => {
-	const {actionArg, body_request} = useViberRequest();
+	const {actionArg, message_request} = useViberRequest();
    
     switch (actionArg.link) {
 		case LINKS.index.toString():
-			if (!body_request) {
+			if (!message_request) {
 				return <></>;
 			}
 			return <ViberTextMessage
-				receiver={body_request.sender}
+				receiver={message_request.sender}
 				text={'Hi, I am viber bot with react components for build viber app'}
 				keyboard={
 					<ViberKeyboard Buttons={

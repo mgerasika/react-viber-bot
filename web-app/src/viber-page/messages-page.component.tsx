@@ -18,8 +18,8 @@ import { ViberLocationMessage } from '@viber-common/viber-components/viber-locat
 
 export const MessagesPage = (): JSX.Element => {
 	const [message, setMessage] = useServerState<EViberMessageType>('message', EViberMessageType.text);
-	const { body_request } = useViberRequest();
-	if (!body_request) {
+	const { message_request } = useViberRequest();
+	if (!message_request) {
 		return <></>;
 	}
 
@@ -127,35 +127,35 @@ export const MessagesPage = (): JSX.Element => {
 	switch (message) {
 		case EViberMessageType.text:
 			return <ViberTextMessage
-				receiver={body_request.sender}
+				receiver={message_request.sender}
 				text='Example of messages'
 				keyboard={renderKeyboard()}
 			/>;
 		
 			case EViberMessageType.location:
 				return <ViberLocationMessage
-					receiver={body_request.sender}
+					receiver={message_request.sender}
 					location={{lat:'37.7898', lon:'-122.3942'}}
 					keyboard={renderKeyboard()}
 				/>;
 		
 				case EViberMessageType.sticker:
 					return <ViberStickerMessage
-						receiver={body_request.sender}
+						receiver={message_request.sender}
 						sticker_id={46105}
 						keyboard={renderKeyboard()}
 					/>;
 		
 					case EViberMessageType.contact:
 					return <ViberContactMessage
-						receiver={body_request.sender}
+						receiver={message_request.sender}
 						contact={{name:'MH', phone_number:'+380999999'}}
 						keyboard={renderKeyboard()}
 					/>;
 		
 					case EViberMessageType.file:
 					return <ViberFileMessage
-						receiver={body_request.sender}
+						receiver={message_request.sender}
 						keyboard={renderKeyboard()}
 						media="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Honeycrisp-Apple.jpg/2269px-Honeycrisp-Apple.jpg"
 						sizeInBytes={10000}
@@ -164,14 +164,14 @@ export const MessagesPage = (): JSX.Element => {
 		
 					case EViberMessageType.url:
 						return <ViberUrlMessage
-							receiver={body_request.sender}
+							receiver={message_request.sender}
 							keyboard={renderKeyboard()}
 							media="https://google.com"
 						/>;
 		
 		case EViberMessageType.picture:
 			return			<ViberPictureMessage
-					receiver={body_request.sender}
+					receiver={message_request.sender}
 					text='Example of messages'
 					keyboard={renderKeyboard()}
 					media={'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Honeycrisp-Apple.jpg/2269px-Honeycrisp-Apple.jpg'}
@@ -179,7 +179,7 @@ export const MessagesPage = (): JSX.Element => {
 		
 		case EViberMessageType.video:
 			return	<ViberVideoMessage
-						receiver={body_request.sender}
+						receiver={message_request.sender}
 						text='Example of messages'
 						keyboard={renderKeyboard()}
 						media={'http://techslides.com/demos/sample-videos/small.mp4'}
@@ -189,7 +189,7 @@ export const MessagesPage = (): JSX.Element => {
 
 		case EViberMessageType.rich_media:
 			return <ViberRichMessage
-				receiver={body_request.sender}
+				receiver={message_request.sender}
 				keyboard={renderKeyboard()}
 				rich_media={
 					<ViberRichMedia Buttons={<>
@@ -206,7 +206,7 @@ export const MessagesPage = (): JSX.Element => {
 			/>;
 		default:
 			return <ViberTextMessage
-				receiver={body_request.sender}
+				receiver={message_request.sender}
 				text='Example of messages'
 				keyboard={renderKeyboard()}
 			/>;

@@ -7,13 +7,13 @@ import { ViberTextMessage } from '@viber-common/viber-components/viber-text-mess
 
 
 export const ButtonsPage = (): JSX.Element => {
-	const { body_request } = useViberRequest();
-	if (!body_request) {
+	const { message_request } = useViberRequest();
+	if (!message_request) {
 		return <></>;
 	}
 	return (
 		<ViberTextMessage
-			receiver={body_request.sender}
+			receiver={message_request.sender}
 			text=''
 			keyboard={
 				<ViberKeyboard

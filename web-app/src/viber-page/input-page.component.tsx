@@ -1,4 +1,3 @@
-import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
 import { useServerInput } from '@viber-common/hooks/use-server-input.hook';
 import { LINKS } from '@src/constants/links.constant';
 import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
@@ -6,9 +5,10 @@ import { LinkButton } from '@viber-common/general-ui/link-button.component';
 import { useServerState } from '@viber-common/hooks/use-server-state.hook';
 import { Button } from '@viber-common/general-ui/button.component';
 import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
+import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
 
 export const InputPage = (): JSX.Element => {
-	const { body_request } = useViberRequest() ;
+	const { message_request } = useViberRequest() ;
 	const [text, setText] = useServerState('text','Enter first name');
 	
 	useServerInput((e) => {
@@ -16,12 +16,12 @@ export const InputPage = (): JSX.Element => {
 		setText('useServerInput callback = '+JSON.stringify(e));
 	});
 
-	if (!body_request) {
+	if (!message_request) {
 		return <></>;
 	}
 	return (
-		<ViberMessage
-			receiver={body_request.sender}
+		<ViberTextMessage
+			receiver={message_request.sender}
 			text={text}
 			keyboard={
 				<ViberKeyboard

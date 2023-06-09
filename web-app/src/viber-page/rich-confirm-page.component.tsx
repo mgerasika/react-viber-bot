@@ -7,7 +7,7 @@ import { LinkButton } from '@viber-common/general-ui/link-button.component';
 import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
 
 export const RichConfirmPage = (): JSX.Element => {
-	const {  body_request } = useViberRequest();
+	const {  message_request } = useViberRequest();
 	const [text, setText] = useServerState('text', 'Are you sure?');
 	const handleOkClick = () => {
 		setText('ok clicked');
@@ -17,12 +17,12 @@ export const RichConfirmPage = (): JSX.Element => {
 		setText('cancel clicked');
 	};
 
-	if (!body_request) {
+	if (!message_request) {
 		return <></>;
 	}
 	return (
 		<ViberRichMessage
-			receiver={body_request.sender}
+			receiver={message_request.sender}
 			rich_media={
 				<RichMediaConfirmModal
 					text={text}

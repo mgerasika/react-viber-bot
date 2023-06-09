@@ -28,7 +28,7 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 				actionArg = { link: '' };
 			}
 			const result = await renderToStringAsync(reactApp, {
-				body_request: body ,
+				message_request: body ,
 				conversation_started_request: undefined,
 				actionArg,
 				trackingData: undefined,
@@ -42,7 +42,7 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 
 			const result = await renderToStringAsync(reactApp,{
 				conversation_started_request: body,
-				body_request: undefined,
+				message_request: undefined,
 				actionArg: {
 					link: '/',
 				},

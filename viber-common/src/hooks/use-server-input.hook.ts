@@ -11,7 +11,7 @@ export function useServerInput( callback: (text:string) => void): void {
 	});
 
 	if (!context.hasFinishedPromise(key)) {
-		const msg = context.request.body_request?.message.text ;
+		const msg = context.request.message_request?.message.text ;
 		// TODO temporary solution - user can't enter json
 		if (msg && !isJsonString(msg)) {
 			callback(msg);
