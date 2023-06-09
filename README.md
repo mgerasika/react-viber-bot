@@ -33,5 +33,5 @@ export const App = (): JSX.Element => {
 	);
 };
 ```
-// result
+## result
 ![2023-06-09_10-34](https://github.com/mgerasika/react-viber-bot/assets/10614750/701eb99e-95c6-44c6-a775-5661f17a16fb)
