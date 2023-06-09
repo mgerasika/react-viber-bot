@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express from "express";
 const http = require("http");
-const app = express();
+const expressApp = express();
 
 import "module-alias/register";
 import bodyParser from "body-parser";
@@ -18,24 +18,24 @@ import { createExpressCallback } from '../../viber-common/src/express-callback';
 import { App } from "./viber-page/app.component";
 
 
-app.use(bodyParser.json()); // to support JSON-encoded bodies
-app.use(
+expressApp.use(bodyParser.json()); // to support JSON-encoded bodies
+expressApp.use(
   bodyParser.urlencoded({
     // to support URL-encoded bodies
     extended: true,
   })
 );
-app.use(express.json());
-app.use(express.urlencoded());
+expressApp.use(express.json());
+expressApp.use(express.urlencoded());
 // app.use(express.multipart());
 
 const expressCallback = createExpressCallback(<App />);
-app.post("/web_hook", expressCallback);
+expressApp.post("/web_hook", expressCallback);
 
 const PORT = process.env.PORT || 3009;
-console.log('env', app.get("env"));
+console.log('env', expressApp.get("env"));
 
-const httpServer = http.createServer(app);
+const httpServer = http.createServer(expressApp);
 
 httpServer.listen(PORT, () => {
   console.log(`Example http app listening on port ${PORT}`);
