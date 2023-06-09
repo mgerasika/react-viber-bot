@@ -128,7 +128,7 @@ export const MessagesPage = (): JSX.Element => {
 		case EViberMessageType.text:
 			return <ViberTextMessage
 				receiver={message_request.sender}
-				text='Hello world'
+				text='Example of messages'
 				keyboard={renderKeyboard()}
 			/>;
 		
