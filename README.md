@@ -1,8 +1,8 @@
 # viber-bot
 
-Write![download](https://github.com/mgerasika/viber-bot/assets/10614750/73a06e8d-152b-4343-9a87-b263887a656c)
+[See demo into your phone ](https://github.com/mgerasika/viber-bot/assets/10614750/73a06e8d-152b-4343-9a87-b263887a656c)
 
-
+With react-viber-bot you can write app for viber app ([using viber rest api](https://developers.viber.com/docs/api/rest-bot-api/#get-started)) with react library.
 ```
 export const ButtonsPage = (): JSX.Element => {
 	const { body_request } = useViberRequest();
