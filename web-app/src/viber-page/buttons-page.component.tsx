@@ -1,11 +1,9 @@
 import { LINKS } from '@src/constants/links.constant';
 import {  Button } from '@viber-common/general-ui/button.component';
-import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
 import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { ViberCard } from '../../../viber-common/src/general-ui/viber-card.component';
-import { ViberRichMedia } from '@viber-common/viber-components/viber-rich-media.component';
 import { LinkButton } from '@viber-common/general-ui/link-button.component';
 import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
+import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
 
 
 export const ButtonsPage = (): JSX.Element => {
@@ -13,10 +11,10 @@ export const ButtonsPage = (): JSX.Element => {
 	if (!body_request) {
 		return <></>;
 	}
-	const items = ['a', 'b', 'c', 'd'];
 	return (
-		<ViberMessage
+		<ViberTextMessage
 			receiver={body_request.sender}
+			text=''
 			keyboard={
 				<ViberKeyboard
 					Buttons={
@@ -25,32 +23,30 @@ export const ButtonsPage = (): JSX.Element => {
 								name="reply"
 								Text="Reply Button"
 								ActionType='reply'
-								Columns={2}
+								Columns={3}
 								Rows={1}
-
 							/>
 							<Button
 								name="location"
 								Text="Location Picker Button"
 								ActionType='location-picker'
-								Columns={2}
+								Columns={3}
 								Rows={1}
 							/>
 							<Button
 								name="share"
 								Text="Share Phone Button"
 								ActionType='share-phone'
-								Columns={2}
+								Columns={3}
 								Rows={1}
 							/>
 							<Button
 								name="none"
 								Text="None Button"
 								ActionType='none'
-								Columns={2}
+								Columns={3}
 								Rows={1}
 							/>
-							
 							
 							<LinkButton
 								name="back"
@@ -67,24 +63,6 @@ export const ButtonsPage = (): JSX.Element => {
 						</>
 					}
 				/>
-			}
-			rich_media={
-				<ViberRichMedia
-					Buttons={
-						<>
-							{items.map((article) => (
-								<div key={article}>
-									<ViberCard
-										link={`#${article}`}
-										id={article}
-										title={article}
-										description={article}
-									/>
-								</div>
-							))}
-						</>}
-				/>
-
 			}
 		/>
 	);

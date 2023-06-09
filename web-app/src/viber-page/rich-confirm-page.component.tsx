@@ -1,29 +1,27 @@
 import { RichMediaConfirmModal } from '@viber-common/general-ui/rich-media-confirm-modal.component';
-import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
+import { ViberRichMessage } from '@viber-common/viber-components/viber-rich-message.component';
 import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
 import { useServerState } from '@viber-common/hooks/use-server-state.hook';
-import { useServerRoute } from '@viber-common/hooks/use-server-route';
 import { LINKS } from '@src/constants/links.constant';
+import { LinkButton } from '@viber-common/general-ui/link-button.component';
+import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
 
 export const RichConfirmPage = (): JSX.Element => {
 	const {  body_request } = useViberRequest();
 	const [text, setText] = useServerState('text', 'Are you sure?');
-	const { navigate} = useServerRoute('route');
 	const handleOkClick = () => {
-		setText('ok');
+		setText('ok clicked');
 	};
 
 	const handleCancelClick = () => {
-		setText('cancel');
-
-		navigate(LINKS.index.toString());
+		setText('cancel clicked');
 	};
 
 	if (!body_request) {
 		return <></>;
 	}
 	return (
-		<ViberMessage
+		<ViberRichMessage
 			receiver={body_request.sender}
 			rich_media={
 				<RichMediaConfirmModal
@@ -31,8 +29,13 @@ export const RichConfirmPage = (): JSX.Element => {
 					onOkClick={handleOkClick}
 					onCancelClick={handleCancelClick}
 				/>
-					
 			}
+			keyboard={
+					<ViberKeyboard Buttons={
+						<LinkButton name='back' ActionType='reply' Columns={6} Rows={1} Text="Back" link={LINKS.index.toString()} />
+					} />
+                   
+				}
 		/>
 	);
 };

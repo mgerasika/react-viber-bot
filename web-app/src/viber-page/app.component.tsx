@@ -7,8 +7,9 @@ import { LINKS } from '@src/constants/links.constant';
 import { RichConfirmPage } from './rich-confirm-page.component';
 import { LinkButton } from '@viber-common/general-ui/link-button.component';
 import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { ViberMessage } from '@viber-common/viber-components/viber-message.component';
+import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
 import { InputPage } from './input-page.component';
+import { MessagesPage } from './messages-page.component';
 
 
 export const App = (): JSX.Element => {
@@ -17,20 +18,24 @@ export const App = (): JSX.Element => {
     switch (actionArg.link) {
 		case LINKS.index.toString():
 			if (!body_request) {
-				return <></>
+				return <></>;
 			}
-			return <ViberMessage
+			return <ViberTextMessage
 				receiver={body_request.sender}
-				text={'Hi, I am chatbot for viber react components'}
+				text={'Hi, I am viber bot with react components for build viber app'}
 				keyboard={
 					<ViberKeyboard Buttons={
 						<>
+							<LinkButton name='messages-page'
+								ActionType='reply' Columns={3} Rows={1} Text="Messages" link={LINKS.messages.toString()} />
+							
 							<LinkButton name='buttons' ActionType='reply' Columns={3} Rows={1} Text="Buttons" link={LINKS.buttons.toString()} />
 							<LinkButton name="input" ActionType='reply' Columns={3} Rows={1} Text="Input" link={LINKS.input.toString()} />
-							<LinkButton name='rich-confirm-modal'
+							<LinkButton name='rich-confirm-page'
 								ActionType='reply' Columns={3} Rows={1} Text="Rich Confirm" link={LINKS.rich_confirm.toString()} />
+							
 								
-							<LinkButton name='exit' ActionType='reply' Columns={6} Rows={1} Text="Exit" link={LINKS.exit.toString()} />
+							<LinkButton name='back' ActionType='reply' Columns={6} Rows={1} Text="Back" link={LINKS.index.toString()} />
 						</>
 					} />
                    
@@ -38,7 +43,10 @@ export const App = (): JSX.Element => {
 			/>;
 		
 		case LINKS.welcome.toString():
-            return <WelcomePage />;
+			return <WelcomePage />;
+		
+			case LINKS.messages.toString():
+            return <MessagesPage />;
 
 
         case LINKS.exit.toString():
