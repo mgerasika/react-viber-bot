@@ -35,3 +35,7 @@ export const App = (): JSX.Element => {
 ```
 ### Result in your viber app:
 ![2023-06-09_10-34](https://github.com/mgerasika/react-viber-bot/assets/10614750/701eb99e-95c6-44c6-a775-5661f17a16fb)
+![bot2](https://github.com/mgerasika/react-viber-bot/assets/10614750/50e888af-8c37-4461-a3d8-40fa4be08751)
+![bot3](https://github.com/mgerasika/react-viber-bot/assets/10614750/01104f89-f94c-4094-884a-a26979a11b97)
+![bot4](https://github.com/mgerasika/react-viber-bot/assets/10614750/024a50c2-bc7d-4f59-8477-16a7f6f3b076)
+![bot5](https://github.com/mgerasika/react-viber-bot/assets/10614750/f5c98f8c-3f97-4f1e-9cf5-f69d441f3e0d)
