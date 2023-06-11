@@ -13,8 +13,11 @@ import { MessagesPage } from './messages-page.component';
 
 
 export const App = (): JSX.Element => {
-	const {actionArg, message_request} = useViberRequest();
+	const {actionArg, message_request, conversation_started_request} = useViberRequest();
    
+	if (conversation_started_request) {
+		return <WelcomePage />;
+	}
     switch (actionArg.link) {
 		case LINKS.index.toString():
 			if (!message_request) {
@@ -42,10 +45,8 @@ export const App = (): JSX.Element => {
 				}
 			/>;
 		
-		case LINKS.welcome.toString():
-			return <WelcomePage />;
 		
-			case LINKS.messages.toString():
+		case LINKS.messages.toString():
             return <MessagesPage />;
 
 

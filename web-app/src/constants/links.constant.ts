@@ -1,7 +1,6 @@
 import { EMPTY_URL_ITEM, IUrlItem, createUrls } from 'react-create-url';
 
 interface IAppLink {
-    welcome: IUrlItem;
     index: IUrlItem;
 
 	messages: IUrlItem;
@@ -13,7 +12,6 @@ interface IAppLink {
 
 export const LINKS = createUrls<IAppLink>({
     index: EMPTY_URL_ITEM,
-    welcome: EMPTY_URL_ITEM,
 
 	messages: EMPTY_URL_ITEM,
 	buttons: EMPTY_URL_ITEM,
