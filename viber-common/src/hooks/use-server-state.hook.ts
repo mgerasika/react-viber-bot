@@ -11,12 +11,14 @@ export function useServerState<T = any>(name: string, initial: T): [T | typeof i
 	
 	const value = context.getPromiseResult(key)?.data || initial;
 	return [value, (newVal) => {
-		context.addPromise(new Promise(resolve => {
-			context.updatePromiseResult(key, {
-				isFinished: true,
-				data: newVal
-			});
-			resolve('');
-		}));
+		if (newVal !== value) {
+			context.addPromise(new Promise(resolve => {
+				context.updatePromiseResult(key, {
+					isFinished: true,
+					data: newVal
+				});
+				resolve('');
+			}));
+		}
 	}];
 }

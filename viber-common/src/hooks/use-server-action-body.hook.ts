@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { useUnique } from "./use-unique.hook";
 
 
-export function useServerActionBody(name: string, callback: (args: IViberActionArg) => void): IViberActionArg {
-	const key = useUnique('useActionBody', name);
+export function useServerAction(name: string, callback: (args: IViberActionArg) => void): IViberActionArg {
+	const key = useUnique('useServerAction', name);
 	const context = useContext(ViberServerContext);
 	context.updatePromiseResult(key, {
 		isInitialized: true

@@ -2,7 +2,10 @@ import { IViberContext, ViberServerContext } from '@viber-common/shared/viber-se
 import { useContext } from 'react';
 import { useUnique } from './use-unique.hook';
 
-export function useServerQuery<T>(name: string, callback: () => Promise<T>): [T | undefined | null] {
+interface IOptions {
+	enabled?: boolean;
+}
+export function useServerQuery<T>(name: string, callback: () => Promise<T>, options: IOptions = { enabled: true }): { data: T | undefined | null } {
 	const key = useUnique('useServerQuery', name);
 	const context: IViberContext = useContext(ViberServerContext);
 	context.updatePromiseResult(key, {
@@ -10,7 +13,7 @@ export function useServerQuery<T>(name: string, callback: () => Promise<T>): [T 
 	});
 
     const data = context.getPromiseResult(key)?.data;
-	if ( !context.hasFinishedPromise(key)) {
+	if ( !context.hasFinishedPromise(key)&& options?.enabled) {
 		const promise = callback();
 		
 		context.addPromise(promise.then((data) => {
@@ -20,5 +23,5 @@ export function useServerQuery<T>(name: string, callback: () => Promise<T>): [T 
 			});
 		}));
     }
-    return [data];
+	return { data: data };
 }

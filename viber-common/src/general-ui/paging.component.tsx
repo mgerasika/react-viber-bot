@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from './button.component';
-import { useServerActionBody } from '@viber-common/hooks/use-server-action-body.hook';
+import { useServerAction } from '@viber-common/hooks/use-server-action-body.hook';
 
 interface IProps {
     currentPage: number;
@@ -11,11 +11,11 @@ interface IProps {
 
 export const Paging = ({  currentPage, totalPages, onChange }: IProps): JSX.Element => {
 
-	const handlePrevClick = useServerActionBody('handlePrevClick', (e) => {
+	const handlePrevClick = useServerAction('handlePrevClick', (e) => {
 		onChange && onChange(+e.actionArgument);
 	});
 
-	const handleNextClick = useServerActionBody('handleNextClick', (e) => {
+	const handleNextClick = useServerAction('handleNextClick', (e) => {
 		onChange && onChange(+e.actionArgument);
 	});
     return (

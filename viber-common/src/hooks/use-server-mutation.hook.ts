@@ -14,7 +14,6 @@ export function useServerMutation<T>(name: string, callback: () => Promise<T>): 
 	return {
 		mutate: () => {
 			if (!context.hasFinishedPromise(key)) {
-				
 				context.addPromise(callback().then((data) => {
 					context.updatePromiseResult(key, {
 						isFinished: true,

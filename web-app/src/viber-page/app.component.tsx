@@ -10,6 +10,7 @@ import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.com
 import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
 import { InputPage } from './input-page.component';
 import { MessagesPage } from './messages-page.component';
+import { HooksPage } from './hooks-page.component';
 
 
 export const App = (): JSX.Element => {
@@ -25,14 +26,17 @@ export const App = (): JSX.Element => {
 			}
 			return <ViberTextMessage
 				receiver={message_request.sender}
-				text={'Hi, I am viber bot with react components for build viber app'}
+				text={'Select what you want to explore'}
 				keyboard={
 					<ViberKeyboard Buttons={
 						<>
 							<LinkButton name='messages-page'
-								ActionType='reply' Columns={3} Rows={1} Text="Messages" link={LINKS.messages.toString()} />
+								ActionType='reply' Columns={2} Rows={1} Text="Messages" link={LINKS.messages.toString()} />
 							
-							<LinkButton name='buttons' ActionType='reply' Columns={3} Rows={1} Text="Buttons" link={LINKS.buttons.toString()} />
+							<LinkButton name='hooks-page'
+								ActionType='reply' Columns={2} Rows={1} Text="Hooks" link={LINKS.hooks.toString()} />
+							
+							<LinkButton name='buttons' ActionType='reply' Columns={2} Rows={1} Text="Buttons" link={LINKS.buttons.toString()} />
 							<LinkButton name="input" ActionType='reply' Columns={3} Rows={1} Text="Input" link={LINKS.input.toString()} />
 							<LinkButton name='rich-confirm-page'
 								ActionType='reply' Columns={3} Rows={1} Text="Rich Confirm" link={LINKS.rich_confirm.toString()} />
@@ -45,6 +49,8 @@ export const App = (): JSX.Element => {
 				}
 			/>;
 		
+		case LINKS.hooks.toString():
+			return <HooksPage />;
 		
 		case LINKS.messages.toString():
             return <MessagesPage />;

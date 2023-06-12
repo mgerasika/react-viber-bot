@@ -8,6 +8,7 @@ interface IAppLink {
 	input: IUrlItem;
 	rich_confirm: IUrlItem;
 	exit: IUrlItem;
+	hooks: IUrlItem;
 }
 
 export const LINKS = createUrls<IAppLink>({
@@ -18,4 +19,5 @@ export const LINKS = createUrls<IAppLink>({
 	input: EMPTY_URL_ITEM,
 	rich_confirm: EMPTY_URL_ITEM,
 	exit: EMPTY_URL_ITEM,
+	hooks: EMPTY_URL_ITEM,
 });
