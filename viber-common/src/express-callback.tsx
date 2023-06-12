@@ -65,7 +65,7 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 		}
 		console.log('webhook_response = ', resObj);
 		if (resObj && resObj.message) {
-			return response.status(200).send(JSON.stringify(resObj));
+			return response.status(200).send(JSON.stringify(resObj.message));
 		}
 		else {
 			return response.status(200).send();
