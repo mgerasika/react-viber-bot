@@ -98,7 +98,7 @@ export const MessagesPage = (): JSX.Element => {
 					Rows={1}
 				/>
 
-<Button
+				<Button
 					name="url"
 					Text="Url Message"
 					ActionType='reply'
@@ -132,60 +132,60 @@ export const MessagesPage = (): JSX.Element => {
 				keyboard={renderKeyboard()}
 			/>;
 		
-			case EViberMessageType.location:
-				return <ViberLocationMessage
-					receiver={message_request.sender}
-					location={{lat:'37.7898', lon:'-122.3942'}}
-					keyboard={renderKeyboard()}
-				/>;
+		case EViberMessageType.location:
+			return <ViberLocationMessage
+				receiver={message_request.sender}
+				location={{ lat: '37.7898', lon: '-122.3942' }}
+				keyboard={renderKeyboard()}
+			/>;
 		
-				case EViberMessageType.sticker:
-					return <ViberStickerMessage
-						receiver={message_request.sender}
-						sticker_id={46105}
-						keyboard={renderKeyboard()}
-					/>;
+		case EViberMessageType.sticker:
+			return <ViberStickerMessage
+				receiver={message_request.sender}
+				sticker_id={46105}
+				keyboard={renderKeyboard()}
+			/>;
 		
-					case EViberMessageType.contact:
-					return <ViberContactMessage
-						receiver={message_request.sender}
-						contact={{name:'MH', phone_number:'+380999999'}}
-						keyboard={renderKeyboard()}
-					/>;
+		case EViberMessageType.contact:
+			return <ViberContactMessage
+				receiver={message_request.sender}
+				contact={{ name: 'MH', phone_number: '+380999999' }}
+				keyboard={renderKeyboard()}
+			/>;
 		
-					case EViberMessageType.file:
-					return <ViberFileMessage
-						receiver={message_request.sender}
-						keyboard={renderKeyboard()}
-						media="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Honeycrisp-Apple.jpg/2269px-Honeycrisp-Apple.jpg"
-						sizeInBytes={10000}
-						file_name="apple.jpg"
-					/>;
+		case EViberMessageType.file:
+			return <ViberFileMessage
+				receiver={message_request.sender}
+				keyboard={renderKeyboard()}
+				media="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Honeycrisp-Apple.jpg/2269px-Honeycrisp-Apple.jpg"
+				sizeInBytes={10000}
+				file_name="apple.jpg"
+			/>;
 		
-					case EViberMessageType.url:
-						return <ViberUrlMessage
-							receiver={message_request.sender}
-							keyboard={renderKeyboard()}
-							media="https://google.com"
-						/>;
+		case EViberMessageType.url:
+			return <ViberUrlMessage
+				receiver={message_request.sender}
+				keyboard={renderKeyboard()}
+				media="https://google.com"
+			/>;
 		
 		case EViberMessageType.picture:
-			return			<ViberPictureMessage
-					receiver={message_request.sender}
-					text='Example of messages'
-					keyboard={renderKeyboard()}
-					media={'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Honeycrisp-Apple.jpg/2269px-Honeycrisp-Apple.jpg'}
+			return <ViberPictureMessage
+				receiver={message_request.sender}
+				text='Example of messages'
+				keyboard={renderKeyboard()}
+				media={'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Honeycrisp-Apple.jpg/2269px-Honeycrisp-Apple.jpg'}
 				thumbnail={'https://www.altmarkt-galerie-dresden.de/fileadmin/user_upload/GLOBAL/brand_stores/logos/apple.jpg'} />;
 		
 		case EViberMessageType.video:
-			return	<ViberVideoMessage
-						receiver={message_request.sender}
-						text='Example of messages'
-						keyboard={renderKeyboard()}
-						media={'http://techslides.com/demos/sample-videos/small.mp4'}
-						sizeInBytes={144 * 1024}
-						durationInSeconds={5}
-							thumbnail={'https://www.altmarkt-galerie-dresden.de/fileadmin/user_upload/GLOBAL/brand_stores/logos/apple.jpg'} />;
+			return <ViberVideoMessage
+				receiver={message_request.sender}
+				text='Example of messages'
+				keyboard={renderKeyboard()}
+				media={'http://techslides.com/demos/sample-videos/small.mp4'}
+				sizeInBytes={144 * 1024}
+				durationInSeconds={5}
+				thumbnail={'https://www.altmarkt-galerie-dresden.de/fileadmin/user_upload/GLOBAL/brand_stores/logos/apple.jpg'} />;
 
 		case EViberMessageType.rich_media:
 			return <ViberRichMessage
@@ -201,7 +201,7 @@ export const MessagesPage = (): JSX.Element => {
 							Rows={7}
 						/>
 					</>}
-				/>
+					/>
 				}
 			/>;
 		default:

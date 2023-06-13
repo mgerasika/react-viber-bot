@@ -40,11 +40,13 @@ After that, add callback for your web hook:
 
 ```jsx
 // index.ts
-import {createExpressCallback} from 'react-viber-bot';
+import {renderToStringAsync} from 'react-viber-bot';
 import {App} from 'app.component';
 ...
-const expressCallback = createExpressCallback(<App />);
-expressApp.post("/web_hook", expressCallback);
+expressApp.post("/web_hook", async (req,res) => {
+	const {status, message} = await renderToStringAsync(<App />, req);
+	res.status(status).send(message);
+});
 ```
 
 ```jsx
