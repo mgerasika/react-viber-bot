@@ -3,7 +3,7 @@ import { IViberOriginalButtonProps, ViberOriginalButton } from '../viber-compone
 import { useServerAction } from '@react-viber/hooks/use-server-action-body.hook';
 import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
 
-export interface IProps extends Omit<IViberOriginalButtonProps, 'ActionBody'>{
+ interface IProps extends Omit<IViberOriginalButtonProps, 'ActionBody'>{
 	name: string;
 	onClick?: () => void;
 }

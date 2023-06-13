@@ -3,7 +3,7 @@ import { IViberOriginalButtonProps, ViberOriginalButton } from '../viber-compone
 import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
 import React from 'react';
 
-export interface IProps extends Omit<IViberOriginalButtonProps, 'ActionBody'>{
+ interface IProps extends Omit<IViberOriginalButtonProps, 'ActionBody'>{
 	name: string;
 	link: string;
 }

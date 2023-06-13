@@ -8,7 +8,6 @@ import { renderToStringAsync } from "./utils/render-to-string-async.util";
 import { LINK_AND_METADATA_SEPARATOR } from "./general-ui/button.component";
 import { isJsonString } from "./utils/is-json-string.utils";
 
-
 export  const createExpressCallback = (reactApp:any) => async (request:any, response:any) => {
 	try {
 		const requestBody = request.body;

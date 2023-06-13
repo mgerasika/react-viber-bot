@@ -24,15 +24,16 @@ export const Paging = ({  currentPage, totalPages, onChange }: IProps): JSX.Elem
                 ActionType={currentPage === 0 ? 'none' : 'reply'}
                 Text={currentPage === 0 ? '' : 'Попередня'}
                 Columns={2}
-                Rows={1}
-				ActionBody={{
-					...handlePrevClick,
-                    actionArgument: currentPage - 1,
-                }}
+				Rows={1}
+				name='prev'
+				// ActionBody={{
+				// 	...handlePrevClick,
+                //     actionArgument: currentPage - 1,
+                // }}
             />
             <Button
                 ActionType="none"
-                ActionBody={undefined}
+               name="none"
                 Columns={2}
                 Rows={1}
                 Text={`${currentPage + 1} з ${totalPages}`}
@@ -42,10 +43,11 @@ export const Paging = ({  currentPage, totalPages, onChange }: IProps): JSX.Elem
                 Text={currentPage === totalPages - 1 ? '' : 'Наступна'}
                 Columns={2}
                 Rows={1}
-                ActionBody={{
-                   ...handleNextClick,
-                    actionArgument: currentPage + 1,
-                }}
+                // ActionBody={{
+                //    ...handleNextClick,
+                //     actionArgument: currentPage + 1,
+                // }}
+				name="next"
             />
             
 			
