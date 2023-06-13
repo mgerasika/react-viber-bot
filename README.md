@@ -8,6 +8,10 @@ With react-viber-bot you can write bot for viber app ([using viber rest api](htt
 
 First of all you need register webhook [here](https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook)
 
+Demo video:
+[viber-bot.webm](https://github.com/mgerasika/react-viber-bot/assets/10614750/51f3c948-4913-463a-bb62-e66a78396ca8)
+
+
 ## Install
 
 ```sh
