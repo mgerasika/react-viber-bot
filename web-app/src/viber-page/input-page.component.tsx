@@ -1,11 +1,11 @@
-import { useServerInput } from '@viber-common/hooks/use-server-input.hook';
+import { useServerInput } from '@react-viber/hooks/use-server-input.hook';
 import { LINKS } from '@src/constants/links.constant';
-import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { LinkButton } from '@viber-common/general-ui/link-button.component';
-import { useServerState } from '@viber-common/hooks/use-server-state.hook';
-import { Button } from '@viber-common/general-ui/button.component';
-import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
-import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
+import { ViberKeyboard } from '@react-viber/viber-components/viber-keyboard.component';
+import { LinkButton } from '@react-viber/general-ui/link-button.component';
+import { useServerState } from '@react-viber/hooks/use-server-state.hook';
+import { Button } from '@react-viber/general-ui/button.component';
+import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
+import { ViberTextMessage } from '@react-viber/viber-components/viber-text-message.component';
 
 export const InputPage = (): JSX.Element => {
 	const { message_request } = useViberRequest() ;

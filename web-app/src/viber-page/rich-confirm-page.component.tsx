@@ -1,10 +1,10 @@
-import { RichMediaConfirmModal } from '@viber-common/general-ui/rich-media-confirm-modal.component';
-import { ViberRichMessage } from '@viber-common/viber-components/viber-rich-message.component';
-import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
-import { useServerState } from '@viber-common/hooks/use-server-state.hook';
+import { RichMediaConfirmModal } from '@react-viber/general-ui/rich-media-confirm-modal.component';
+import { ViberRichMessage } from '@react-viber/viber-components/viber-rich-message.component';
+import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
+import { useServerState } from '@react-viber/hooks/use-server-state.hook';
 import { LINKS } from '@src/constants/links.constant';
-import { LinkButton } from '@viber-common/general-ui/link-button.component';
-import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
+import { LinkButton } from '@react-viber/general-ui/link-button.component';
+import { ViberKeyboard } from '@react-viber/viber-components/viber-keyboard.component';
 
 export const RichConfirmPage = (): JSX.Element => {
 	const {  message_request } = useViberRequest();

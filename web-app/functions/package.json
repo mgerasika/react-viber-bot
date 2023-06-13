@@ -15,7 +15,7 @@
     "main": "dist/web-app/functions/src/index.js",
     "_moduleAliases": {
         "@src": "dist/web-app/src/",
-		"@viber-common": "dist/viber-common/src/"
+		"@react-viber": "dist/react-viber/src/"
     },
     "dependencies": {
         "firebase-admin": "^11.5.0",

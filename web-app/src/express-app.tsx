@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express from "express";
 export const expressApp = express();
-const functions = require("firebase-functions");
 require("module-alias/register");
 require("dotenv").config();
 import axios, { AxiosRequestConfig } from 'axios';
@@ -11,12 +10,13 @@ const path = require('path');
 //
 // Register alias
 //
-moduleAlias.addAlias('@viber-common', path.resolve(__dirname, '../..') + '/viber-common/src');
+moduleAlias.addAlias('@react-viber', path.resolve(__dirname, '../..') + '/react-viber/src');
 moduleAlias.addAlias('@src', path.resolve(__dirname, '../..') + '../../dist/web-app/src');
 
-import { createExpressCallback } from '../../viber-common/src/express-callback';
+import { createExpressCallback } from '../../react-viber/src/express-callback';
 import { App } from "./viber-page/app.component";
 import { ENV } from "./env.constant";
+import { API_URLS } from "./constants/api-urls.constant";
 
 expressApp.use(bodyParser.json()); // to support JSON-encoded bodies
 expressApp.use(
@@ -27,59 +27,45 @@ expressApp.use(
 );
 expressApp.use(express.json());
 expressApp.use(express.urlencoded());
-// app.use(express.multipart());
 
-
-const EApis = {
-	setup: "/setup",
-	unSetup: "/unsetup",
-	webhook: "/react_viber_web_hook",
-	proxy_web_hook: "/proxy_web_hook"
-};
 
 expressApp.get('/', (req:any, res:any) => {
-	functions.logger.log('echo ' + Object.values(EApis).join(", ") + " viberHook = " + ENV.VIBER_WEB_HOOK + " proxyHook=" + ENV.PROXY_WEB_HOOK);
-	res.send(Object.values(EApis).join(", ") + " viberHook = " + ENV.VIBER_WEB_HOOK + ' proxyHook=' + ENV.PROXY_WEB_HOOK);
+	res.send(Object.values(API_URLS).join(", ") + " viberHook = " + ENV.VIBER_WEB_HOOK + ' proxyHook=' + ENV.PROXY_WEB_HOOK);
 });
 
 const expressCallback = createExpressCallback(<App />);
-const DEBUG = true;
-if (DEBUG) {
-	expressApp.post(EApis.proxy_web_hook, expressCallback);
+const PROXY_SERVER = true;
+if (PROXY_SERVER) {
+	expressApp.post(API_URLS.proxy_web_hook, expressCallback);
 
-	expressApp.post(EApis.webhook, async (req: any, res: any) => {
+	expressApp.post(API_URLS.webhook, async (req: any, res: any) => {
 		const body = req.body;
 
-		functions.logger.log("webhook-body", JSON.stringify(body));
 		try {
 			await axios
 				.post(ENV.PROXY_WEB_HOOK || '', body)
-				.then(async (x: any) => {
-					functions.logger.log("webhook-result success");
-					functions.logger.log("webhook-result then = ", x.data ? JSON.stringify(x.data) : 'empty');
-					const data = x.data;
+				.then(async (response: any) => {
+					const data = response.data;
 					if (data) {
 						await sendMessageAsync(data);
 					}
-				
-					return true;
 				})
-				.catch((error: any) => {
-					functions.logger.log("webhook-result error inside = ", JSON.stringify(error));
+				.catch((ex) => {
+					console.error(ex);
 				});
 
-		} catch (error) {
-			functions.logger.log("error outside = " + JSON.stringify(error));
+		} catch (ex) {
+			console.error(ex);
 		}
 
 		res.status(200).send();
 	});
 }
 else {
-	expressApp.post(EApis.webhook, expressCallback);
+	expressApp.post(API_URLS.webhook, expressCallback);
 }
 
-expressApp.get(EApis.setup, async (req:any, res:any) => {
+expressApp.get(API_URLS.setup, async (req:any, res:any) => {
 	try {
 		const data = await axios.post(
 			"https://chatapi.viber.com/pa/set_webhook",
@@ -107,7 +93,7 @@ expressApp.get(EApis.setup, async (req:any, res:any) => {
 	}
 });
 
-expressApp.get(EApis.unSetup, async (req:any, res:any) => {
+expressApp.get(API_URLS.unSetup, async (req:any, res:any) => {
 	try {
 		const data = await axios.post(
 			"https://chatapi.viber.com/pa/set_webhook",
@@ -132,6 +118,7 @@ function getAxiosConfig():AxiosRequestConfig {
 	};
 }
 
+// example
 //  sender: {
 // 	name: "John McClane",
 // 	avatar: "http://avatar.example.com",

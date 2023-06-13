@@ -1,7 +1,7 @@
-import { Button } from '@viber-common/general-ui/button.component';
-import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
-import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
+import { Button } from '@react-viber/general-ui/button.component';
+import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
+import { ViberKeyboard } from '@react-viber/viber-components/viber-keyboard.component';
+import { ViberTextMessage } from '@react-viber/viber-components/viber-text-message.component';
 import React from 'react';
 
 export const WelcomePage = (): JSX.Element => {

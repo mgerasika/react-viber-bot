@@ -20,9 +20,9 @@
     "isolatedModules": true,
     "sourceMap": true,
     "paths": {
-      "@src/*": ["src/*"],
-      "@react-viber/*": ["../react-viber/src/*"]
+      "@react-viber/*": ["src/*"]
     }
   },
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

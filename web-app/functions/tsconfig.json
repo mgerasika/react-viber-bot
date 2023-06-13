@@ -18,7 +18,7 @@
         "baseUrl": ".",
         "paths": {
             "@src/*": ["../src/*"],
-			"@viber-common/*": ["../../viber-common/src/*"]
+			"@react-viber/*": ["../../react-viber/src/*"]
         }
     },
     "exclude": ["node_modules"]

@@ -1,13 +1,13 @@
-import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
+import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
 import { ButtonsPage } from './buttons-page.component';
 import { ExitPage } from './exit-page.component';
 import { NotFoundPage } from './not-found-page.component';
 import { WelcomePage } from './welcome-page.component';
 import { LINKS } from '@src/constants/links.constant';
 import { RichConfirmPage } from './rich-confirm-page.component';
-import { LinkButton } from '@viber-common/general-ui/link-button.component';
-import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
+import { LinkButton } from '@react-viber/general-ui/link-button.component';
+import { ViberKeyboard } from '@react-viber/viber-components/viber-keyboard.component';
+import { ViberTextMessage } from '@react-viber/viber-components/viber-text-message.component';
 import { InputPage } from './input-page.component';
 import { MessagesPage } from './messages-page.component';
 import { HooksPage } from './hooks-page.component';

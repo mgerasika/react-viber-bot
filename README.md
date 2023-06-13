@@ -8,9 +8,33 @@ With react-viber-bot you can write bot for viber app ([using viber rest api](htt
 
 First of all you need register webhook [here](https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook)
 
+## Install
+
+```sh
+npm install react-viber
+```
+or 
+```sh
+yarn add react-viber
+```
+
+## Usage
+
+## Contents
+
+- [Getting Started](#getting-started)
+- [Hooks](#hooks)
+  - [useServerState](#useserverstate)
+  - [useServerTimeout](#useservertimeout)
+  - [useServerQuery](#useserverquery)
+  - [useServerMutation](#useservermutation)
+
+
+### Getting Started
+In this example used express.js so, first of all install express.js and all dependencies.
 After that, add callback for your web hook:
 
-```
+```jsx
 // index.ts
 import {createExpressCallback} from 'react-viber-bot';
 import {App} from 'app.component';
@@ -19,7 +43,7 @@ const expressCallback = createExpressCallback(<App />);
 expressApp.post("/web_hook", expressCallback);
 ```
 
-```
+```jsx
 // app.component.tsx
 export const App = (): JSX.Element => {
 	const { message_request } = useViberRequest();
@@ -40,11 +64,11 @@ export const App = (): JSX.Element => {
 
 ### useServerState
 
-```
+```jsx
 const [message, setMessage] = useServerState('message', '');
 ```
 
-```
+```jsx
 export const Example = (): JSX.Element => {
 	const [message, setMessage] = useServerState('message', '');
 
@@ -80,11 +104,11 @@ export const Example = (): JSX.Element => {
 
 ### useServerTimeout
 
-```
+```jsx
 const {callback} = useServerTimeout('callback', () => console.log('hello world), 1000);
 ```
 
-```
+```jsx
 export const Example = (): JSX.Element => {
 	const {callback} = useServerTimeout('callback', () => console.log('hello world), 1000);
 
@@ -118,11 +142,11 @@ export const Example = (): JSX.Element => {
 
 ### useServerQuery
 
-```
+```jsx
 const {data} = useServerQuery('query', () => axios.get('https://cat-fact.herokuapp.com/facts/'));
 ```
 
-```
+```jsx
 export const Example = (): JSX.Element => {
 	const {data} = useServerQuery('query', () => axios.get('https://cat-fact.herokuapp.com/facts/'));
 
@@ -142,11 +166,11 @@ export const Example = (): JSX.Element => {
 
 ### useServerMutation
 
-```
+```jsx
 const {mutate} = useServerMutation('mutation', (data) => axios.post('https://cat-fact.herokuapp.com/facts/', data));
 ```
 
-```
+```jsx
 export const Example = (): JSX.Element => {
 	const {mutate} = useServerMutation('mutation', () => axios.get('https://cat-fact.herokuapp.com/facts/'));
 

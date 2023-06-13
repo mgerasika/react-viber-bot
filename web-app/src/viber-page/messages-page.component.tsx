@@ -1,20 +1,20 @@
 import { LINKS } from '@src/constants/links.constant';
-import { Button } from '@viber-common/general-ui/button.component';
-import { ViberKeyboard } from '@viber-common/viber-components/viber-keyboard.component';
-import { LinkButton } from '@viber-common/general-ui/link-button.component';
-import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
-import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
-import { ViberPictureMessage } from '@viber-common/viber-components/viber-picture-message.component';
-import { ViberVideoMessage } from '@viber-common/viber-components/viber-video-message.component';
-import { ViberUrlMessage } from '@viber-common/viber-components/viber-url-message.component';
-import { useServerState } from '@viber-common/hooks/use-server-state.hook';
-import { EViberMessageType } from '@viber-common/enums/viber-message-type.enum';
-import { ViberRichMessage } from '@viber-common/viber-components/viber-rich-message.component';
-import { ViberRichMedia } from '@viber-common/viber-components/viber-rich-media.component';
-import { ViberContactMessage } from '@viber-common/viber-components/viber-contact-message.component';
-import { ViberStickerMessage } from '@viber-common/viber-components/viber-sticker-message.component';
-import { ViberFileMessage } from '@viber-common/viber-components/viber-file-message.component';
-import { ViberLocationMessage } from '@viber-common/viber-components/viber-location-message.component';
+import { Button } from '@react-viber/general-ui/button.component';
+import { ViberKeyboard } from '@react-viber/viber-components/viber-keyboard.component';
+import { LinkButton } from '@react-viber/general-ui/link-button.component';
+import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
+import { ViberTextMessage } from '@react-viber/viber-components/viber-text-message.component';
+import { ViberPictureMessage } from '@react-viber/viber-components/viber-picture-message.component';
+import { ViberVideoMessage } from '@react-viber/viber-components/viber-video-message.component';
+import { ViberUrlMessage } from '@react-viber/viber-components/viber-url-message.component';
+import { useServerState } from '@react-viber/hooks/use-server-state.hook';
+import { EViberMessageType } from '@react-viber/enums/viber-message-type.enum';
+import { ViberRichMessage } from '@react-viber/viber-components/viber-rich-message.component';
+import { ViberRichMedia } from '@react-viber/viber-components/viber-rich-media.component';
+import { ViberContactMessage } from '@react-viber/viber-components/viber-contact-message.component';
+import { ViberStickerMessage } from '@react-viber/viber-components/viber-sticker-message.component';
+import { ViberFileMessage } from '@react-viber/viber-components/viber-file-message.component';
+import { ViberLocationMessage } from '@react-viber/viber-components/viber-location-message.component';
 
 export const MessagesPage = (): JSX.Element => {
 	const [message, setMessage] = useServerState<EViberMessageType>('message', EViberMessageType.text);

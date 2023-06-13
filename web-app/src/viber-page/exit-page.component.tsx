@@ -1,7 +1,7 @@
 
-import { useViberRequest } from '@viber-common/hooks/use-viber-request.hook';
-import { IViberReceiver } from '@viber-common/interfaces/viber-sender.interface';
-import { ViberTextMessage } from '@viber-common/viber-components/viber-text-message.component';
+import { useViberRequest } from '@react-viber/hooks/use-viber-request.hook';
+import { IViberReceiver } from '@react-viber/interfaces/viber-sender.interface';
+import { ViberTextMessage } from '@react-viber/viber-components/viber-text-message.component';
 import React from 'react';
 
 export const ExitPage = (): JSX.Element => {
