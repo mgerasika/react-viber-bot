@@ -29,7 +29,7 @@ export * from './interfaces/viber-unsubscribe.interface';
 
 export * from './shared/viber-server.context';
 
-export * from './utils/render-to-string-async.util';
+export * from './utils/render-to-string-internal-async.util';
 
 export * from './viber-components/json-root.component';
 export * from './viber-components/json.component';
@@ -46,4 +46,4 @@ export * from './viber-components/viber-text-message.component';
 export * from './viber-components/viber-url-message.component';
 export * from './viber-components/viber-video-message.component';
 
-export * from './express-callback';
+export * from './render-to-string-async';

@@ -4,11 +4,15 @@ import { IViberConversationStartedMessage } from "./interfaces/viber-conversatio
 import { IViberMessage } from "./interfaces/viber-message.interface";
 import { IViberResponse } from "./interfaces/viber-response.interface";
 import { IViberUnsubscribeMessage } from "./interfaces/viber-unsubscribe.interface";
-import { renderToStringAsync } from "./utils/render-to-string-async.util";
+import { renderToStringInternalAsync } from "./utils/render-to-string-internal-async.util";
 import { LINK_AND_METADATA_SEPARATOR } from "./general-ui/button.component";
 import { isJsonString } from "./utils/is-json-string.utils";
 
-export  const createExpressCallback = (reactApp:any) => async (request:any, response:any) => {
+export interface IResponse {
+	status: number;
+	message: any;
+}
+export const renderToStringAsync = async (reactApp:any, request: any): Promise<IResponse> => {
 	try {
 		const requestBody = request.body;
 		console.log('webhook_request body = ', requestBody);
@@ -26,8 +30,8 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 				console.error('error parse input argument input = ', input);
 				actionArg = { link: '' };
 			}
-			const result = await renderToStringAsync(reactApp, {
-				message_request: body ,
+			const result = await renderToStringInternalAsync(reactApp, {
+				message_request: body,
 				conversation_started_request: undefined,
 				actionArg,
 				trackingData: undefined,
@@ -39,13 +43,13 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 			const body = requestBody as IViberConversationStartedMessage;
 			console.log('subscribe', body);
 
-			const result = await renderToStringAsync(reactApp,{
+			const result = await renderToStringInternalAsync(reactApp, {
 				conversation_started_request: body,
 				message_request: undefined,
 				actionArg: {
 					link: '/',
 				},
-				trackingData:undefined,
+				trackingData: undefined,
 			});
 			resObj = {
 				message: result.json,
@@ -64,16 +68,24 @@ export  const createExpressCallback = (reactApp:any) => async (request:any, resp
 		}
 		console.log('webhook_response = ', resObj);
 		if (resObj && resObj.message) {
-			return response.status(200).send(JSON.stringify(resObj.message));
+			return {
+				message: resObj.message,
+				status: 200,
+			};
 		}
 		else {
-			return response.status(200).send();
+			return {
+				status: 200,
+				message:''
+			}
 		}
 	} catch (err) {
 		console.log('error', err);
-		response.status(400).send();
+		return {
+			status: 400,
+			message: ''
+		};
 	}
-}
-
+};
 
 

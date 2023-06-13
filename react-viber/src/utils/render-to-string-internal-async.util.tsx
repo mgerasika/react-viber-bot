@@ -11,7 +11,7 @@ export interface IRenderToStringResult {
     renderCount: number;
 }
 
-export const renderToStringAsync = async (reactApp: any, request: IViberRequest): Promise<IRenderToStringResult> => {
+export const renderToStringInternalAsync = async (reactApp: any, request: IViberRequest): Promise<IRenderToStringResult> => {
 	let promises: Promise<any>[] = [];
 	const promiseResults: Record<string, IPromiseResultInfo | undefined> = {};
 	const contextValue: IViberContext = {

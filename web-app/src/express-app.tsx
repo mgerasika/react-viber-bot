@@ -13,7 +13,7 @@ const path = require('path');
 moduleAlias.addAlias('@react-viber', path.resolve(__dirname, '../..') + '/react-viber/src');
 moduleAlias.addAlias('@src', path.resolve(__dirname, '../..') + '../../dist/web-app/src');
 
-import { createExpressCallback } from '../../react-viber/src/express-callback';
+import { renderToStringAsync } from '../../react-viber/src/render-to-string-async';
 import { App } from "./viber-page/app.component";
 import { ENV } from "./env.constant";
 import { API_URLS } from "./constants/api-urls.constant";
@@ -33,10 +33,12 @@ expressApp.get('/', (req:any, res:any) => {
 	res.send(Object.values(API_URLS).join(", ") + " viberHook = " + ENV.VIBER_WEB_HOOK + ' proxyHook=' + ENV.PROXY_WEB_HOOK);
 });
 
-const expressCallback = createExpressCallback(<App />);
-const PROXY_SERVER = true;
+const PROXY_SERVER = false;
 if (PROXY_SERVER) {
-	expressApp.post(API_URLS.proxy_web_hook, expressCallback);
+	expressApp.post(API_URLS.proxy_web_hook, async (req, res) => {
+		const data = await renderToStringAsync(<App />, req);
+		return res.status(data.status).send(JSON.stringify(data.message));
+	});
 
 	expressApp.post(API_URLS.webhook, async (req: any, res: any) => {
 		const body = req.body;
@@ -49,6 +51,7 @@ if (PROXY_SERVER) {
 					if (data) {
 						await sendMessageAsync(data);
 					}
+					return true;
 				})
 				.catch((ex) => {
 					console.error(ex);
@@ -62,7 +65,20 @@ if (PROXY_SERVER) {
 	});
 }
 else {
-	expressApp.post(API_URLS.webhook, expressCallback);
+	expressApp.post(API_URLS.webhook, async (req: any, res: any) => {
+		const data = await renderToStringAsync(<App />, req);
+
+		try {
+			if (data && data.status < 400) {
+				await sendMessageAsync(data.message);
+			}
+
+		} catch (ex) {
+			console.error(ex);
+		}
+
+		res.status(200).send();
+	});
 }
 
 expressApp.get(API_URLS.setup, async (req:any, res:any) => {
